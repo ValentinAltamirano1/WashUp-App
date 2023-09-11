@@ -54,7 +54,7 @@ a {
 }
 
 a:hover {
-  color: #4bb6b7;
+  color: #2596be;
 }
 
 .content {
@@ -315,5 +315,5 @@ input {
 }
 
 .social-container a:hover {
-  border: 1px solid #4bb6b7;
+  border: 1px solid #2596be;
 }

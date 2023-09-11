@@ -87,7 +87,7 @@ button {
   position: relative;
   border-radius: 20px;
   border: 1px solid #4bb6b7;
-  background-color: #4bb6b7;
+  background-color: #2596be;
   color: #fff;
   font-size: 15px;
   font-weight: 700;
@@ -233,7 +233,8 @@ input {
 }
 
 .overlay {
-  background: #4bb6b7;
+  background: url(https://cdn.dribbble.com/users/470545/screenshots/3451849/slatervroom_drbbbl.gif
+  );
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 0;

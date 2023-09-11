@@ -317,3 +317,14 @@ input {
 .social-container a:hover {
   border: 1px solid #2596be;
 }
+
+.centered-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh; 
+  font-size: 15px;
+  font-weight: 700;
+  text-shadow: 1px 1px 1px rgb(168, 208, 234);
+  color: #234653;
+}

@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import logo from '../assets/img/Logo.png';
 import navIcon1 from '../assets/img/nav-icon3.svg';
+import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 export const NavBar = () => {
+  const navigate = useNavigate();
   const [activeLink, setActiveLink] = useState('home');
   const [scrolled, setScrolled] = useState(false);
 
@@ -48,8 +51,8 @@ export const NavBar = () => {
               <div className="social-icon">
                 <a href="#"><img src={navIcon1} alt="" /></a>
               </div>
-              <button className="btn btn-lg vvd-btn" onClick={() => console.log('connect')}><span>Connect</span></button>
-            </span>
+              <Button variant="contained" className="btn btn-lg vvd-btn" onClick={() => navigate('/login')}>Connect</Button>
+              </span>
           </Navbar.Collapse>
         </Container>
      </Navbar>

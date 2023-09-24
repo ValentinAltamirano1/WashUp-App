@@ -1,4 +1,4 @@
-import '../App.css';
+import './home.css';
 import { NavBar } from './NavBar';
 import { Banner } from './Banner';
 import { Skills } from './Skills';
@@ -7,9 +7,9 @@ import { Footer } from './Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-function Index() {
+const Home = () => {
   return (
-    <div className="Index">
+    <div className="Home">
       <NavBar/>
       <Banner />
       <Skills />
@@ -19,4 +19,4 @@ function Index() {
   );
 }
 
-export default Index;
+export default Home;

@@ -4,17 +4,7 @@
   box-sizing: border-box;
 }
 
-.body {
-  display: flex;
-  font-family: "Poppins", sans-serif;
-  background-color: #f6f5f7;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  font-family: "Poppins", sans-serif;
-  overflow: hidden;
-  height: 100vh;
-}
+
 
 h1 {
   font-weight: 700;
@@ -37,12 +27,6 @@ p {
   letter-spacing: 0.5px;
   margin: 20px 0 30px;
   margin-bottom: 15px;
-  text-shadow: 0 0 10px rgba(16, 46, 74, 0.5);
-}
-
-span {
-  font-size: 14px;
-  margin-top: 25px;
 }
 
 a {

@@ -3,7 +3,7 @@ import { Container, Row, Col, Tab, Nav } from "react-bootstrap";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
 
-export const Services = () => {
+const Services = () => {
   const [activeTab, setActiveTab] = useState("first");
 
   const services = [
@@ -120,6 +120,7 @@ export const Services = () => {
   );
 };
 
+export default Services
 
 
 

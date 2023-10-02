@@ -4,7 +4,6 @@ import { Banner } from './Banner';
 import { Skills } from './Skills';
 import { Project } from './Project';
 import { Footer } from './Footer';
-import { AboutUs } from './AboutUs'
 import { Locations } from './Locations'
 
 import 'bootstrap/dist/css/bootstrap.min.css';

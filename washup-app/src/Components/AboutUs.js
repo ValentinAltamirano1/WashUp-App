@@ -1,6 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
-import lavadero1 from "../assets/img/lavadero1.jpg"; // Ruta de tu primera imagen
-import lavadero2 from "../assets/img/lavadero2.jpg"; // Ruta de tu segunda imagen
+import lavadero1 from "../assets/img/lavadero1.jpg";
+import lavadero2 from "../assets/img/lavadero2.jpg";
 import { useState } from "react";
 
 export const AboutUs = () => {
@@ -29,7 +29,7 @@ export const AboutUs = () => {
   };
 
   const textContainerStyle = {
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "#e2f5fc",
     padding: "20px",
     borderRadius: "5px",
   };
@@ -62,8 +62,15 @@ export const AboutUs = () => {
       <Container>
         <Row>
           {/* Primer cuadrado */}
-          <Col lg={6} md={12}>
+          <Col lg={6} md={12} style={{ marginTop: "60px" }}>
             <div className="about-box">
+              <div className="about-text" style={textContainerStyle}>
+                <h2 style={textStyle}>Nuestra Historia</h2>
+                <p style={textStyle}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Nulla eget magna nec odio lobortis luctus.
+                </p>
+              </div>
               <div
                 className="about-image"
                 onMouseEnter={handleMouseEnter1}
@@ -78,7 +85,7 @@ export const AboutUs = () => {
                   style={imageStyle}
                 />
                 <div
-                  className="overlay"
+                  className="overlay-about-us"
                   style={{
                     ...overlayStyle,
                     opacity: isHovered1 ? 1 : 0,
@@ -87,18 +94,12 @@ export const AboutUs = () => {
                   Más de 10 años de experiencia
                 </div>
               </div>
-              <div className="about-text" style={textContainerStyle}>
-                <h2 style={textStyle}>Our Story</h2>
-                <p style={textStyle}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nulla eget magna nec odio lobortis luctus.
-                </p>
-              </div>
             </div>
           </Col>
 
+
           {/* Segundo cuadrado */}
-          <Col lg={6} md={12}>
+          <Col lg={6} md={12} style={{ marginTop: "60px" }}>
             <div className="about-box">
               <div
                 className="about-image"
@@ -114,7 +115,7 @@ export const AboutUs = () => {
                   style={imageStyle}
                 />
                 <div
-                  className="overlay"
+                  className="overlay-about-us"
                   style={{
                     ...overlayStyle,
                     opacity: isHovered2 ? 1 : 0,
@@ -124,7 +125,7 @@ export const AboutUs = () => {
                 </div>
               </div>
               <div className="about-text" style={textContainerStyle}>
-                <h2 style={textStyle}>Our Services</h2>
+                <h2 style={textStyle}>Nuestros Valores</h2>
                 <p style={textStyle}>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Nulla eget magna nec odio lobortis luctus.
@@ -137,21 +138,6 @@ export const AboutUs = () => {
     </section>
   );
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

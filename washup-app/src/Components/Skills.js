@@ -1,7 +1,11 @@
 import React from 'react';
 import picture1 from "../assets/img/Chemical-Guys-16-PieceArsenal.png";
-import meter2 from "../assets/img/meter2.svg";
-import meter3 from "../assets/img/meter3.svg";
+import picture2 from "../assets/img/Chemical-Guys-Pink-Foaming.png";
+import picture3 from "../assets/img/Chemical-Guys-Hydroslick-IntenseGloss.png";
+import picture4 from "../assets/img/Chemical-Guys-Foam-Cannon.png";
+import picture5 from "../assets/img/Chemical-Guys-Butter-Wet-Wax.png";
+import picture6 from "../assets/img/ArmorAll-Carpet-Upholstery-Cleaner.png";
+import picture7 from "../assets/img/LeatherHoney-Cleaner.png";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import arrow1 from "../assets/img/arrow1.svg";
@@ -38,22 +42,34 @@ return (
                     <div className="skill-bx wow zoomIn">
                         <h2>Productos</h2>
                         <p>Nuestro equipo profesional está aquí para brindarte los mejores productos</p>
-                        <Carousel responsive={responsive} infinite={true} className="owl-carousel owl-theme skill-slider">
+                        <Carousel responsive={responsive} infinite={true} className="owl-carousel owl-theme skill-slider" >
                             <div className="item">
                                 <img src={picture1} alt="Image" />
-                                <h5>Car Wash</h5>
+                                <h5>Chemical Guys HOL169 - Kit de lavado de coche Arsenal Builder</h5>
                             </div>
                             <div className="item">
-                                <img src={meter2} alt="Image" />
-                                <h5>Brand Identity</h5>
+                                <img src={picture2} alt="Image" />
+                                <h5>Chemical Guys CWS_402 Mr. Pink - Jabón espumante para lavado de autos</h5>
                             </div>
                             <div className="item">
-                                <img src={meter3} alt="Image" />
-                                <h5>Purpose</h5>
+                                <img src={picture3} alt="Image" />
+                                <h5>Chemical Guys WAC22916 HydroSlick: Capa Cerámica Sio2 de Alto Brillo e Hiper Cera, Brillo Hiperrealzado</h5>
                             </div>
                             <div className="item">
-                                <img src={picture1} alt="Image" />
-                                <h5>Time</h5>
+                                <img src={picture4} alt="Image" />
+                                <h5>Chemical Guys EQP_310 TORQ Cañón de Espuma</h5>
+                            </div>
+                            <div className="item">
+                                <img src={picture5} alt="Image" />
+                                <h5>Chemical Guys WAC_201_16 Cera húmeda de mantequilla, brillo húmedo profundo</h5>
+                            </div>
+                            <div className="item">
+                                <img src={picture6} alt="Image" />
+                                <h5>Limpiador en Spray para Alfombras y Tapicería</h5>
+                            </div>
+                            <div className="item">
+                                <img src={picture7} alt="Image" />
+                                <h5>Limpiador de Cuero Leather Honey</h5>
                             </div>
                         </Carousel>
                     </div>

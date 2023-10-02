@@ -91,16 +91,17 @@ const Login = () => {
 
 const RegisterForm = ({ username, email, password, setUsername, setEmail, setPassword }) => (
   <div className="form-container register-container">
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet"></link>
     <form action="#">
       <h1>Register here</h1>
       <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}/>
       <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
       <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
       <button>Register</button>
-      <span>or use your account</span>
       <div className="social-container">
         <a href="#" className="social">
           <i className="lni lni-google"></i>
+          <span className="span-link">Register with your account</span>
         </a>
       </div>
     </form>
@@ -109,6 +110,7 @@ const RegisterForm = ({ username, email, password, setUsername, setEmail, setPas
 
 const LoginForm = ({ email, password, setEmail, setPassword, handleLogin }) => (
   <div className="form-container login-container">
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet"></link>
     <form action="#">
       <h1>Login here</h1>
       <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -123,10 +125,10 @@ const LoginForm = ({ email, password, setEmail, setPassword, handleLogin }) => (
         </div>
       </div>
       <button onClick={handleLogin}>Login</button>
-      <span>or use your account</span>
       <div className="social-container">
         <a href="#" className="social">
           <i className="lni lni-google"></i>
+          <span>Login with your account</span>
         </a>
       </div>
     </form>

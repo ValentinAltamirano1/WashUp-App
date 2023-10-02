@@ -1,5 +1,5 @@
 import React from 'react';
-import meter1 from "../assets/img/meter1.svg";
+import picture1 from "../assets/img/Chemical-Guys-16-PieceArsenal.png";
 import meter2 from "../assets/img/meter2.svg";
 import meter3 from "../assets/img/meter3.svg";
 import Carousel from 'react-multi-carousel';
@@ -36,11 +36,11 @@ return (
             <div className="row">
                 <div className="col-12">
                     <div className="skill-bx wow zoomIn">
-                        <h2>Skills</h2>
-                        <p>Our professional team is here to provide you with the best services.</p>
+                        <h2>Productos</h2>
+                        <p>Nuestro equipo profesional está aquí para brindarte los mejores productos</p>
                         <Carousel responsive={responsive} infinite={true} className="owl-carousel owl-theme skill-slider">
                             <div className="item">
-                                <img src={meter1} alt="Image" />
+                                <img src={picture1} alt="Image" />
                                 <h5>Car Wash</h5>
                             </div>
                             <div className="item">
@@ -52,7 +52,7 @@ return (
                                 <h5>Purpose</h5>
                             </div>
                             <div className="item">
-                                <img src={meter1} alt="Image" />
+                                <img src={picture1} alt="Image" />
                                 <h5>Time</h5>
                             </div>
                         </Carousel>

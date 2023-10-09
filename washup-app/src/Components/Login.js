@@ -41,6 +41,37 @@ const Login = () => {
     }
   };
 
+  const handleLoginForm = async () => {
+    const emailValue = email;
+    const passwordValue = password;
+  
+    console.log('Email:', emailValue);
+    console.log('Password:', passwordValue);
+  
+    try {
+      const response = await fetch('http://localhost:4000/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: emailValue,
+          password: passwordValue,
+        }),
+      });
+  
+      if (response.ok) {
+        // Manejar la respuesta exitosa, por ejemplo, redirigir al usuario
+        // o mostrar un mensaje de éxito.
+      } else {
+        // Manejar la respuesta de error, por ejemplo, mostrar un mensaje de error.
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+
   const handleFormChange = (isLoginForm) => {
     setIsLoginForm(isLoginForm);
 
@@ -65,7 +96,7 @@ const Login = () => {
             password={password}
             setEmail={setEmail}
             setPassword={setPassword}
-            
+            handleLoginForm={handleLoginForm}
           />
         ) : (
           <RegisterForm
@@ -89,7 +120,7 @@ const Login = () => {
   );
 };
 
-const RegisterForm = ({ username, email, password, setUsername, setEmail, setPassword }) => (
+const RegisterForm = ({ username, email, password, setUsername, setEmail, setPassword, handleRegisterForm}) => (
   <div className="form-container register-container">
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet"></link>
     <form action="#">
@@ -97,7 +128,7 @@ const RegisterForm = ({ username, email, password, setUsername, setEmail, setPas
       <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}/>
       <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
       <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      <button>Register</button>
+      <button onClick={handleRegisterForm}>Register</button>
       <div className="social-container">
         <a href="#" className="social">
           <i className="lni lni-google"></i>
@@ -108,7 +139,7 @@ const RegisterForm = ({ username, email, password, setUsername, setEmail, setPas
   </div>
 );
 
-const LoginForm = ({ email, password, setEmail, setPassword, handleLogin }) => (
+const LoginForm = ({ email, password, setEmail, setPassword, handleLoginForm }) => (
   <div className="form-container login-container">
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet"></link>
     <form action="#">
@@ -124,7 +155,7 @@ const LoginForm = ({ email, password, setEmail, setPassword, handleLogin }) => (
           <a href="#">Forgot password?</a>
         </div>
       </div>
-      <button onClick={handleLogin}>Login</button>
+      <button onClick={handleLoginForm}>Login</button>
       <div className="social-container">
         <a href="#" className="social">
           <i className="lni lni-google"></i>

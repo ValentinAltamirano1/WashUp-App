@@ -1,105 +1,264 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "animate.css";
-import TrackVisibility from "react-on-screen";
-import locationImg1 from "../assets/img/location-img1.jpg";
+import { useEffect } from "react";
 
+let map;
+
+async function initMap() {
+  const { Map } = await window.google.maps.importLibrary("maps");
+
+  map = new window.google.maps.Map(document.getElementById("map"), {
+    center: { lat: -34.397, lng: 150.644 },
+    zoom: 8,
+  });
+
+  /*var pocitosCoords = [
+    {lat: -34.902303398246524, lng: -56.16405778520276},
+    {lat: -34.9148152747718, lng: -56.162591387465454},
+    {lat: -34.91425733738307, lng: -56.156212582179776},
+    {lat: -34.916489064185505, lng: -56.15587237923151},
+    {lat: -34.917116726417206, lng: -56.154851770385974},
+    {lat: -34.917883862625494, lng: -56.15136469016312},
+    {lat: -34.918302297534666, lng: -56.1488982187858},
+    {lat: -34.91714840751245, lng: -56.149030867414226},
+    {lat: -34.91631963481924, lng: -56.14896348626628},
+    {lat: -34.91475184387708, lng: -56.14834223132608},
+    {lat: -34.91016322473169, lng: -56.14381805672548},
+    {lat: -34.909870325440465, lng: -56.142865598914554},
+    {lat: -34.909870325440465, lng: -56.14167502665116},
+    {lat: -34.910260857596825, lng: -56.140901154679995},
+    {lat: -34.91035849034585, lng: -56.14024633993529},
+    {lat: -34.910944284401104, lng: -56.13947246796411},
+    {lat: -34.9115300742766, lng: -56.138817653218894},
+    {lat: -34.91211585997225, lng: -56.13846048153992},
+    {lat: -34.91192059853865, lng: -56.13780566679523},
+    {lat: -34.9114812586132, lng: -56.1372103806638},
+    {lat: -34.911041916337446, lng: -56.13625792285286},
+    {lat: -34.910944284401104, lng: -56.135484050881686},
+    {lat: -34.91089546838941, lng: -56.13488876475026},
+    {lat: -34.90606253956129, lng: -56.13679368037158},
+    {lat: -34.90528143345153, lng: -56.137031794824054},
+    {lat: -34.903572737933146, lng: -56.13756755234276},
+    {lat: -34.902596324530506, lng: -56.13810330986095},
+    {lat: -34.90122932626378, lng: -56.13846048153992},
+    {lat: -34.90157107796411, lng: -56.139829639643054},
+    {lat: -34.902352219366556, lng: -56.13679368037158},
+    {lat: -34.902889249770574, lng: -56.14685401599698},
+    {lat: -34.90313335333823, lng: -56.15119960475835},
+    {lat: -34.90313335333823, lng: -56.1541760354166},
+    {lat: -34.90303571199873, lng: -56.15822398111226},
+    {lat: -34.90303571199873, lng: -56.15935502476239},
+    {lat: -34.90293807054229, lng: -56.16072418286555},
+    {lat: -34.90274278728112, lng: -56.161617112062714},
+    {lat: -34.9025475035556, lng: -56.16262909848689},
+    {lat: -34.902303398246524, lng: -56.163343441844816}
+  ];
+
+  var puntaCarretasCoords = [
+    {lat: -34.91477775984231, lng: -56.16267296539266},
+    {lat: -34.92164121224969, lng: -56.16181395198413},
+    {lat: -34.91970531460816, lng: -56.16573107896211},
+    {lat: -34.915085374362285, lng: -56.16578473823587},
+    {lat: -34.91134523227753, lng: -56.165999375329875},
+    {lat: -34.91152124278488, lng: -56.16911161320279},
+    {lat: -34.912093274326885, lng: -56.16905795392904},
+    {lat: -34.91257729790294, lng: -56.16943356884519},
+    {lat: -34.913061318625175, lng: -56.170077480129095},
+    {lat: -34.91495337224835, lng: -56.170292117223084},
+    {lat: -34.91556975683711, lng: -56.169487682763105},
+    {lat: -34.916933758200244, lng: -56.16911206784785},
+    {lat: -34.918253737937775, lng: -56.16927304566909},
+    {lat: -34.91882572256478, lng: -56.17056086823685},
+    {lat: -34.91952969817142, lng: -56.17109746097327},
+    {lat: -34.919661692925665, lng: -56.17227796499361},
+    {lat: -34.92058565026093, lng: -56.17206332789955},
+    {lat: -34.921377605411074, lng: -56.17131209806821},
+    {lat: -34.9227855068089, lng: -56.17120477952072},
+    {lat: -34.922873499844336, lng: -56.171795031530905},
+    {lat: -34.92357744072986, lng: -56.17174137225717},
+    {lat: -34.92428137557742, lng: -56.17211698717331},
+    {lat: -34.92472133179112, lng: -56.17195600935209},
+    {lat: -34.92529327134163, lng: -56.170936483152104},
+    {lat: -34.925337266525865, lng: -56.17002427549953},
+    {lat: -34.925645237213914, lng: -56.169004747231},
+    {lat: -34.926261165014225, lng: -56.16744862829452},
+    {lat: -34.926789099448754, lng: -56.16605348717927},
+    {lat: -34.92758099473095, lng: -56.16530225734792},
+    {lat: -34.92828489523264, lng: -56.164229071875084},
+    {lat: -34.928812816645696, lng: -56.16358516059121},
+    {lat: -34.92898878969543, lng: -56.16261929366492},
+    {lat: -34.92934073466175, lng: -56.161814404559806},
+    {lat: -34.92995663472052, lng: -56.161224152549636},
+    {lat: -34.93017659790698, lng: -56.161814404559806},
+    {lat: -34.930396560502864, lng: -56.161385130370846},
+    {lat: -34.92995663472052, lng: -56.16095585618099},
+    {lat: -34.93030857553575, lng: -56.160526581992045},
+    {lat: -34.93079249169069, lng: -56.161224152549636},
+    {lat: -34.93074849943087, lng: -56.160365604170835},
+    {lat: -34.93220023154735, lng: -56.16004364852934},
+    {lat: -34.93272812776568, lng: -56.16058024126576},
+    {lat: -34.933036065658, lng: -56.16143878964458},
+    {lat: -34.93264014529918, lng: -56.16235099729715},
+    {lat: -34.933387993261526, lng: -56.162243678749675},
+    {lat: -34.933256020586846, lng: -56.163370523496255},
+    {lat: -34.93220023154735, lng: -56.16401443478014},
+    {lat: -34.93347597492669, lng: -56.163799797685215},
+    {lat: -34.9335639564975, lng: -56.16219001947596},
+    {lat: -34.93435578638742, lng: -56.16149244891834},
+    {lat: -34.93497164879414, lng: -56.16095585618099},
+    {lat: -34.93567548588363, lng: -56.16100951545472},
+    {lat: -34.93602740216387, lng: -56.1604729227183},
+    {lat: -34.93796291471266, lng: -56.16058024126576},
+    {lat: -34.937786960914295, lng: -56.159936329981875},
+    {lat: -34.9356314962424, lng: -56.15998998925562},
+    {lat: -34.93435578638742, lng: -56.15897046305561},
+    {lat: -34.932816110138546, lng: -56.15886314450812},
+    {lat: -34.93233220592059, lng: -56.15907778160306},
+    {lat: -34.93145237275663, lng: -56.15875582596158},
+    {lat: -34.93092446832791, lng: -56.15843387031917},
+    {lat: -34.92947271363519, lng: -56.15843387031917},
+    {lat: -34.92890080321774, lng: -56.1586485074141},
+    {lat: -34.92854885636419, lng: -56.15789727758275},
+    {lat: -34.92771297653517, lng: -56.157950936856466},
+    {lat: -34.92722904221584, lng: -56.15714604775137},
+    {lat: -34.92714105385102, lng: -56.1563411586463},
+    {lat: -34.92652513265569, lng: -56.155804565909875},
+    {lat: -34.92617317561142, lng: -56.15473138043615},
+    {lat: -34.925953210833555, lng: -56.15376552596385},
+    {lat: -34.92511730456163, lng: -56.15328259250117},
+    {lat: -34.92472134598621, lng: -56.1511898808283},
+    {lat: -34.92375343920405, lng: -56.151619155017244},
+    {lat: -34.923225485238035, lng: -56.151404517923226},
+    {lat: -34.922697527875265, lng: -56.15070694736559},
+    {lat: -34.92212557023246, lng: -56.14941912479691},
+    {lat: -34.92093764546758, lng: -56.14990205826052},
+    {lat: -34.920497668968935, lng: -56.149258146976635},
+    {lat: -34.920497668968935, lng: -56.14861423569272},
+    {lat: -34.91847374669329, lng: -56.14797032440795},
+    {lat: -34.917109770922465, lng: -56.14727275385029},
+    {lat: -34.91680177325598, lng: -56.1465751832927},
+    {lat: -34.91433775032156, lng: -56.14550199781986},
+    {lat: -34.91477775984231, lng: -56.16267296539266}
+  ];
+
+  var parqueBattlecoords = [
+    {lat: -34.90166291760648, lng: -56.13972564498904},
+    {lat: -34.899311367062005, lng: -56.14063475958319},
+    {lat: -34.89948343454584, lng: -56.14168374956999},
+    {lat: -34.895640508206334, lng: -56.14336213354997},
+    {lat: -34.894149174936, lng: -56.137487789620934},
+    {lat: -34.893518218094535, lng: -56.13811718361352},
+    {lat: -34.890822257001425, lng: -56.13273236834584},
+    {lat: -34.88663473776543, lng: -56.137697587618675},
+    {lat: -34.88663473776543, lng: -56.13860671227428},
+    {lat: -34.887208383152185, lng: -56.14308240288635},
+    {lat: -34.888699834523834, lng: -56.147278372897475},
+    {lat: -34.89001917976858, lng: -56.15049527552502},
+    {lat: -34.89099433437539, lng: -56.15413177414743},
+    {lat: -34.8918547552999, lng: -56.157558474772074},
+    {lat: -34.89277252768724, lng: -56.16000611807584},
+    {lat: -34.89380500936788, lng: -56.162453761379595},
+    {lat: -34.894894837063404, lng: -56.164971337348675},
+    {lat: -34.902236457366264, lng: -56.16413214535898},
+    {lat: -34.90275264035168, lng: -56.16175443472113},
+    {lat: -34.903154113762916, lng: -56.15888719542252},
+    {lat: -34.90309676053846, lng: -56.1549709661371},
+    {lat: -34.90309676053846, lng: -56.151334467514715},
+    {lat: -34.90292470062484, lng: -56.147977699555355},
+    {lat: -34.902809993816405, lng: -56.145669921583405},
+    {lat: -34.90252322609207, lng: -56.14343207627738},
+    {lat: -34.902007041665705, lng: -56.140984432973596},
+    {lat: -34.90166291760648, lng: -56.13972564498904}
+  ];
+
+  var pocitosPolygon = new window.google.maps.Polygon({
+    paths: pocitosCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#FF0000',
+    fillOpacity: 0,
+  });
+
+  var puntaCarretasPolygon = new window.google.maps.Polygon({
+    paths: puntaCarretasCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#FF0000',
+    fillOpacity: 0,
+  });
+
+  var parqueBattlePolygon = new window.google.maps.Polygon({
+    paths: parqueBattlecoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#FF0000',
+    fillOpacity: 0,
+  });
+
+  pocitosPolygon.setMap(map);
+  puntaCarretasPolygon.setMap(map);
+  parqueBattlePolygon.setMap(map);*/
+}
 
 export const Locations = () => {
+  useEffect(() => {
+    window.initMap = initMap;
+
+    if (window.google && window.google.maps) {
+      initMap();
+    }
+  }, []);
+
   const textContainerStyle = {
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "#6ca1b4",
     padding: "20px",
     borderRadius: "5px",
+    width: '600px',
   };
 
   const textStyle = {
-    color: "#333",
+    color: "#fff",
   };
 
-  return (
+  const iframeStyle = {
+    width: '600px',
+    height: '450px', 
+    style: 'border:0;',
+    allowfullscreen: '',
+    loading: 'lazy',
+    referrerpolicy: 'no-referrer-when-downgrade',
+    borderRadius: "10px",
+    justifyContent: 'center',
+  };
+
+  const containerStyle = {
+      textAlign: 'center',
+      margin: '20px 0'
+  };
+
+  const rowStyle = {
+    paddingTop: '20px',
+    paddingBottom: '20px'
+  };
+
+  return ( 
     <section className="locations" id="locations">
-      <Container>
-        <Row>
-          <Col lg={4} md={4}>
+      <Container style={containerStyle}>
+        <Row style={rowStyle}>
+          <Col lg={{span: 4, offset: 4}} md={{span: 4, offset: 4}}>
             <div className="about-box">
               <div className="about-image">
-                <TrackVisibility>
-                  {({ isVisible }) => (
-                    <img
-                      src={locationImg1}
-                      alt="Location 1"
-                      style={{
-                        width: "100%",
-                        height: "auto",
-                        borderRadius: "10px",
-                        filter: isVisible
-                          ? "brightness(70%)"
-                          : "brightness(100%)",
-                        transition: "filter 0.3s",
-                      }}
-                    />
-                  )}
-                </TrackVisibility>
+                <div className="map" id="map" style={iframeStyle}>
+                  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-upHQAJfOoePqdwfQfa_8W0Xvpp1hwvM&callback=initMap"></script>
+                </div>
               </div>
               <div className="about-text" style={textContainerStyle}>
-                <h2 style={textStyle}>Location 1</h2>
+                <h2 style={textStyle}>Ubicación</h2>
                 <p style={textStyle}>Description for Location 1</p>
-              </div>
-            </div>
-          </Col>
-
-          <Col lg={4} md={4}>
-            <div className="about-box">
-              <div className="about-image">
-                <TrackVisibility>
-                  {({ isVisible }) => (
-                    <img
-                      src={locationImg1}
-                      alt="Location 2"
-                      style={{
-                        width: "100%",
-                        height: "auto",
-                        borderRadius: "10px",
-                        filter: isVisible
-                          ? "brightness(70%)"
-                          : "brightness(100%)",
-                        transition: "filter 0.3s",
-                      }}
-                    />
-                  )}
-                </TrackVisibility>
-              </div>
-              <div className="about-text" style={textContainerStyle}>
-                <h2 style={textStyle}>Location 2</h2>
-                <p style={textStyle}>Description for Location 2</p>
-              </div>
-            </div>
-          </Col>
-
-          <Col lg={4} md={4}>
-            <div className="about-box">
-              <div className="about-image">
-                <TrackVisibility>
-                  {({ isVisible }) => (
-                    <img
-                      src={locationImg1}
-                      alt="Location 3"
-                      style={{
-                        width: "100%",
-                        height: "auto",
-                        borderRadius: "10px",
-                        filter: isVisible
-                          ? "brightness(70%)"
-                          : "brightness(100%)",
-                        transition: "filter 0.3s",
-                      }}
-                    />
-                  )}
-                </TrackVisibility>
-              </div>
-              <div className="about-text" style={textContainerStyle}>
-                <h2 style={textStyle}>Location 3</h2>
-                <p style={textStyle}>Description for Location 3</p>
               </div>
             </div>
           </Col>
@@ -108,4 +267,3 @@ export const Locations = () => {
     </section>
   );
 };
-

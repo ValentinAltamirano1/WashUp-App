@@ -248,6 +248,34 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     border-color: transparent;
 }
 
+/* Estilos para el botón "About us" cuando se coloca el cursor sobre él */
+.navbar-text .nav-link.about-us:hover {
+  color: #2596be; /* Cambia el color del texto al pasar el cursor */
+  background-color: #2596be; /* Cambia el color de fondo al pasar el cursor */
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; /* Agrega una transición suave */
+}
+
+
+
+/* Estilos para el botón "Connect" */
+.connect-button {
+  font-weight: 700;
+  color: #2596be !important;
+  border: 1px solid #2596be;
+  padding: 18px 34px;
+  font-size: 18px;
+  margin-left: 18px;
+  position: relative;
+  background-color: transparent;
+  transition: 0.3s ease-in-out;
+}
+
+.connect-button:hover {
+  background-color: #f0faff !important; /* Cambia el color de fondo al pasar el cursor */
+  opacity: 1; /* Mantiene la opacidad completa al pasar el cursor */
+}
+
+
 /************ Banner Css ************/
 .banner {
   margin-top: 0;
@@ -364,6 +392,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   display: block;
   margin: 0 auto 15px auto;
 }
+
 
 
 

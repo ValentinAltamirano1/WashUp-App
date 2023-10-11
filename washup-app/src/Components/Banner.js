@@ -4,8 +4,12 @@ import headerImg from "../assets/img/header-img.gif";
 import { ArrowRightCircle } from 'react-bootstrap-icons';
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
+import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+
 
 export const Banner = () => {
+  const navigate = useNavigate();
   const [loopNum, setLoopNum] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState('');
@@ -58,7 +62,7 @@ export const Banner = () => {
               <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
                 <h1>{`Welcome to WashUp, `} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "fast", "trustworthy", "economic" ]'><span className="wrap">{text}</span></span></h1>
                   <p>Discover the shine your vehicle deserves at our top-notch car wash! At WashUp, we provide professional car washing service that rejuvenates your car's appearance by removing dirt and impurities. Our expert team and quality products ensure a flawless outcome. Trust us to leave your vehicle sparkling and road-ready.</p>
-                  <button onClick={() => console.log('connect')}>Let’s Connect <ArrowRightCircle size={25} /></button>
+                  <Button  onClick={() => navigate('/login')}>Let’s Connect <ArrowRightCircle size={25} /></Button>
               </div>}
             </TrackVisibility>
           </Col>

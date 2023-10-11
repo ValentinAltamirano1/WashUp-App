@@ -2,6 +2,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import lavadero1 from "../assets/img/lavadero1.jpg";
 import lavadero2 from "../assets/img/lavadero2.jpg";
 import { useState } from "react";
+import {NavBar} from "./NavBar";
 
 export const AboutUs = () => {
   const imageStyle = {
@@ -58,84 +59,88 @@ export const AboutUs = () => {
   };
 
   return (
-    <section className="about-us" id="about-us">
-      <Container>
-        <Row>
-          {/* Primer cuadrado */}
-          <Col lg={6} md={12} style={{ marginTop: "60px" }}>
-            <div className="about-box">
-              <div className="about-text" style={textContainerStyle}>
-                <h2 style={textStyle}>Nuestra Historia</h2>
-                <p style={textStyle}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nulla eget magna nec odio lobortis luctus.
-                </p>
-              </div>
-              <div
-                className="about-image"
-                onMouseEnter={handleMouseEnter1}
-                onMouseLeave={handleMouseLeave1}
-                style={{
-                  position: "relative",
-                }}
-              >
-                <img
-                  src={lavadero1}
-                  alt="Fundación del lavadero"
-                  style={imageStyle}
-                />
+    <div>
+      <NavBar /> {/* Abre NavBar antes de la sección AboutUs */}
+        <section className="about-us" id="about-us">
+        <Container>
+          <Row>
+            {/* Primer cuadrado */}
+            <Col lg={6} md={12} style={{ marginTop: "60px" }}>
+              <div className="about-box">
+                <div className="about-text" style={textContainerStyle}>
+                  <h2 style={textStyle}>Nuestra Historia</h2>
+                  <p style={textStyle}>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Nulla eget magna nec odio lobortis luctus.
+                  </p>
+                </div>
                 <div
-                  className="overlay-about-us"
+                  className="about-image"
+                  onMouseEnter={handleMouseEnter1}
+                  onMouseLeave={handleMouseLeave1}
                   style={{
-                    ...overlayStyle,
-                    opacity: isHovered1 ? 1 : 0,
+                    position: "relative",
                   }}
                 >
-                  Más de 10 años de experiencia
+                  <img
+                    src={lavadero1}
+                    alt="Fundación del lavadero"
+                    style={imageStyle}
+                  />
+                  <div
+                    className="overlay-about-us"
+                    style={{
+                      ...overlayStyle,
+                      opacity: isHovered1 ? 1 : 0,
+                    }}
+                  >
+                    Más de 10 años de experiencia
+                  </div>
                 </div>
               </div>
-            </div>
-          </Col>
+            </Col>
 
 
-          {/* Segundo cuadrado */}
-          <Col lg={6} md={12} style={{ marginTop: "60px" }}>
-            <div className="about-box">
-              <div
-                className="about-image"
-                onMouseEnter={handleMouseEnter2}
-                onMouseLeave={handleMouseLeave2}
-                style={{
-                  position: "relative",
-                }}
-              >
-                <img
-                  src={lavadero2}
-                  alt="Nuestros servicios"
-                  style={imageStyle}
-                />
+            {/* Segundo cuadrado */}
+            <Col lg={6} md={12} style={{ marginTop: "60px" }}>
+              <div className="about-box">
                 <div
-                  className="overlay-about-us"
+                  className="about-image"
+                  onMouseEnter={handleMouseEnter2}
+                  onMouseLeave={handleMouseLeave2}
                   style={{
-                    ...overlayStyle,
-                    opacity: isHovered2 ? 1 : 0,
+                    position: "relative",
                   }}
                 >
-                  Una empresa familiar
+                  <img
+                    src={lavadero2}
+                    alt="Nuestros servicios"
+                    style={imageStyle}
+                  />
+                  <div
+                    className="overlay-about-us"
+                    style={{
+                      ...overlayStyle,
+                      opacity: isHovered2 ? 1 : 0,
+                    }}
+                  >
+                    Una empresa familiar
+                  </div>
+                </div>
+                <div className="about-text" style={textContainerStyle}>
+                  <h2 style={textStyle}>Nuestros Valores</h2>
+                  <p style={textStyle}>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Nulla eget magna nec odio lobortis luctus.
+                  </p>
                 </div>
               </div>
-              <div className="about-text" style={textContainerStyle}>
-                <h2 style={textStyle}>Nuestros Valores</h2>
-                <p style={textStyle}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nulla eget magna nec odio lobortis luctus.
-                </p>
-              </div>
-            </div>
-          </Col>
-        </Row>
-      </Container>
-    </section>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+    </div>
+   
   );
 };
 

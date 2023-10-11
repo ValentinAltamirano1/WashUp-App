@@ -6,17 +6,29 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [isLoginForm, setIsLoginForm] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleRegisterForm = async () => {
+
+    // Verificar si los campos obligatorios están vacíos
+    if (!username || !email || !password) {
+      setErrorMessage('Por favor, complete todos los campos.');
+      return;
+    }
+    
     // Obtener los valores más recientes de los campos
     const usernameValue = username;
     const emailValue = email;
     const passwordValue = password;
   
+    //Para probar que los datos se esten pasando correctamente 
     console.log('Username:', usernameValue);
     console.log('Email:', emailValue);
     console.log('Password:', passwordValue);
   
+    // Restablecer el mensaje de error en caso de éxito
+    setErrorMessage('');
+
     try {
       const response = await fetch('http://localhost:4000/users', {
         method: 'POST',
@@ -42,11 +54,19 @@ const Login = () => {
   };
 
   const handleLoginForm = async () => {
+
+    if (!email || !password) {
+      setErrorMessage('Por favor, complete todos los campos.');
+      return;
+    }
     const emailValue = email;
     const passwordValue = password;
   
     console.log('Email:', emailValue);
     console.log('Password:', passwordValue);
+
+    setErrorMessage('');
+
   
     try {
       const response = await fetch('http://localhost:4000/users', {
@@ -97,6 +117,7 @@ const Login = () => {
             setEmail={setEmail}
             setPassword={setPassword}
             handleLoginForm={handleLoginForm}
+            errorMessage={errorMessage} 
           />
         ) : (
           <RegisterForm
@@ -107,6 +128,7 @@ const Login = () => {
             setEmail={setEmail}
             setPassword={setPassword}
             handleRegisterForm={handleRegisterForm}
+            errorMessage={errorMessage} 
           />
         )}
         <div className="overlay-container">
@@ -120,7 +142,7 @@ const Login = () => {
   );
 };
 
-const RegisterForm = ({ username, email, password, setUsername, setEmail, setPassword, handleRegisterForm}) => (
+const RegisterForm = ({ username, email, password, setUsername, setEmail, setPassword, handleRegisterForm, errorMessage}) => (
   <div className="form-container register-container">
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet"></link>
     <form action="#">
@@ -128,6 +150,7 @@ const RegisterForm = ({ username, email, password, setUsername, setEmail, setPas
       <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}/>
       <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
       <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Mostrar mensaje de error */}
       <button onClick={handleRegisterForm}>Register</button>
       <div className="social-container">
         <a href="#" className="social">
@@ -139,7 +162,7 @@ const RegisterForm = ({ username, email, password, setUsername, setEmail, setPas
   </div>
 );
 
-const LoginForm = ({ email, password, setEmail, setPassword, handleLoginForm }) => (
+const LoginForm = ({ email, password, setEmail, setPassword, handleLoginForm, errorMessage}) => (
   <div className="form-container login-container">
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet"></link>
     <form action="#">
@@ -155,6 +178,7 @@ const LoginForm = ({ email, password, setEmail, setPassword, handleLoginForm }) 
           <a href="#">Forgot password?</a>
         </div>
       </div>
+      {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Mostrar mensaje de error */}
       <button onClick={handleLoginForm}>Login</button>
       <div className="social-container">
         <a href="#" className="social">

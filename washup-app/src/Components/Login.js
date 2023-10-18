@@ -1,5 +1,7 @@
 import './login.css';
 import React, { useState } from 'react';
+import { validateEmail } from './utils'; 
+
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -16,6 +18,10 @@ const Login = () => {
       return;
     }
     
+    if (!validateEmail(email)) {
+      setErrorMessage('Por favor, ingrese un correo electrónico válido.');
+      return;
+    }
     // Obtener los valores más recientes de los campos
     const usernameValue = username;
     const emailValue = email;
@@ -69,7 +75,7 @@ const Login = () => {
 
   
     try {
-      const response = await fetch('http://localhost:4000/users', {
+      const response = await fetch('http://localhost:4000/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

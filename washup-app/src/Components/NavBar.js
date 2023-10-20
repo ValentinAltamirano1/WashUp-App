@@ -6,7 +6,7 @@ import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 
-export const NavBar = () => {
+export const NavBar = ({ isAuthenticated }) => {
   const navigate = useNavigate();
   const [activeLink, setActiveLink] = useState('home');
   const [scrolled, setScrolled] = useState(false);
@@ -52,7 +52,11 @@ export const NavBar = () => {
               <div className="social-icon">
                 <a href="#"><img src={navIcon1} alt="" /></a>
               </div>
-              <Button variant="contained" className="btn btn-lg vvd-btn connect-button" onClick={() => navigate('/login')}>Connect</Button>
+              {isAuthenticated ? (
+                <Button variant="contained" className="btn btn-lg vvd-btn" onClick={() => navigate('/about-us')}>Reservar</Button>
+              ) : (
+                <Button variant="contained" className="btn btn-lg vvd-btn connect-button" onClick={() => navigate('/login')}>Connect</Button>
+              )}
               </span>
           </Navbar.Collapse>
         </Container>

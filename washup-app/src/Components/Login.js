@@ -1,6 +1,9 @@
 import './login.css';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { validateEmail } from './utils'; 
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext';
+
 
 
 const Login = () => {
@@ -9,6 +12,19 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [isLoginForm, setIsLoginForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
+  const { login} = useAuth();
+  const [showMessage, setShowMessage] = useState(false);
+
+  useEffect(() => {
+    if (showMessage) {
+      const timeout = setTimeout(() => {
+        setShowMessage(false);
+      }, 5000); // 5000 milisegundos (5 segundos)
+  
+      return () => clearTimeout(timeout);
+    }
+  }, [showMessage]);
 
   const handleRegisterForm = async () => {
 
@@ -49,8 +65,8 @@ const Login = () => {
       });
   
       if (response.ok) {
-        // Manejar la respuesta exitosa, por ejemplo, redirigir al usuario
-        // o mostrar un mensaje de éxito.
+        // Manejar la respuesta exitosa
+        setShowMessage(true);
       } else {
         // Manejar la respuesta de error, por ejemplo, mostrar un mensaje de error.
       }
@@ -87,8 +103,19 @@ const Login = () => {
       });
   
       if (response.ok) {
-        // Manejar la respuesta exitosa, por ejemplo, redirigir al usuario
-        // o mostrar un mensaje de éxito.
+        // Manejar la respuesta exitosa, por ejemplo
+        
+        const data = await response.json();
+        //const token = data.token; // Asume que el token se devuelve desde el backend
+    
+        //login(token); 
+        if (data.email === 'coti@washup.com') {
+          navigate('/dashboard');
+        } else {
+          //login(token);
+          navigate('/');
+        }
+
       } else {
         // Manejar la respuesta de error, por ejemplo, mostrar un mensaje de error.
       }
@@ -135,6 +162,7 @@ const Login = () => {
             setPassword={setPassword}
             handleRegisterForm={handleRegisterForm}
             errorMessage={errorMessage} 
+            showMessage={showMessage}
           />
         )}
         <div className="overlay-container">
@@ -148,16 +176,19 @@ const Login = () => {
   );
 };
 
-const RegisterForm = ({ username, email, password, setUsername, setEmail, setPassword, handleRegisterForm, errorMessage}) => (
+const RegisterForm = ({ username, email, password, setUsername, setEmail, setPassword, handleRegisterForm, errorMessage,showMessage}) => (
   <div className="form-container register-container">
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet"></link>
     <form action="#">
       <h1>Register here</h1>
+      {showMessage && (
+        <p className="success-message">¡Registro exitoso! Ahora puedes iniciar sesión.</p>
+      )}
       <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}/>
       <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
       <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
       {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Mostrar mensaje de error */}
-      <button onClick={handleRegisterForm}>Register</button>
+      <button  type="button" onClick={handleRegisterForm}>Register</button>
       <div className="social-container">
         <a href="#" className="social">
           <i className="lni lni-google"></i>
@@ -215,5 +246,6 @@ const RightOverlay = ({ handleFormChange }) => (
     </button>
   </div>
 );
+
 
 export default Login;

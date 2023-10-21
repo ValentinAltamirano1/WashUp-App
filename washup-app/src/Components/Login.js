@@ -89,38 +89,67 @@ const Login = () => {
 
     setErrorMessage('');
 
+    if(email.endsWith('@washup.com')){
+      try {
+        // Realizar una petición a /empleados
+        const response = await fetch('http://localhost:4000/employee', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: emailValue,
+            password: passwordValue,
+          }),
+        });
+        if (response.ok) {
+          // Manejar la respuesta exitosa, por ejemplo
+          
+          const data = await response.json();
+          //const token = data.token; // Asume que el token se devuelve desde el backend
+      
+          //login(token); 
+          if (data.email === 'coti@washup.com') {
+            navigate('/dashboard');
+          } else {
+            //login(token);
+            navigate('/empleados');
+          }
   
-    try {
-      const response = await fetch('http://localhost:4000/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: emailValue,
-          password: passwordValue,
-        }),
-      });
-  
-      if (response.ok) {
-        // Manejar la respuesta exitosa, por ejemplo
-        
-        const data = await response.json();
-        //const token = data.token; // Asume que el token se devuelve desde el backend
-    
-        //login(token); 
-        if (data.email === 'coti@washup.com') {
-          navigate('/dashboard');
         } else {
+          // Manejar la respuesta de error, por ejemplo, mostrar un mensaje de error.
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }else{
+      try {
+        const response = await fetch('http://localhost:4000/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: emailValue,
+            password: passwordValue,
+          }),
+        });
+    
+        if (response.ok) {
+          // Manejar la respuesta exitosa, por ejemplo
+          
+          const data = await response.json();
+          //const token = data.token; // Asume que el token se devuelve desde el backend
           //login(token);
           navigate('/');
-        }
+          
 
-      } else {
-        // Manejar la respuesta de error, por ejemplo, mostrar un mensaje de error.
+        } else {
+          // Manejar la respuesta de error, por ejemplo, mostrar un mensaje de error.
+        }
+      } catch (error) {
+        console.error('Error:', error);
       }
-    } catch (error) {
-      console.error('Error:', error);
     }
   };
 

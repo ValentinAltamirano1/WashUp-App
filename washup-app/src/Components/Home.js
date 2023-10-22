@@ -6,16 +6,13 @@ import { Project } from './Project';
 import { Footer } from './Footer';
 import { Locations } from './Locations'
 import React from 'react';
-import { useAuth } from './AuthContext';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const Home = () => {
-  const { isAuthenticated } = useAuth();
   return (
     <div className="Home">
-      <NavBar isAuthenticated={isAuthenticated}/>
+      <NavBar/>
       <Banner />
       <Skills />
       <Project />

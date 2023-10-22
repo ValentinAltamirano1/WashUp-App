@@ -137,13 +137,12 @@ const Login = () => {
     
         if (response.ok) {
           // Manejar la respuesta exitosa, por ejemplo
-          
+        
           const data = await response.json();
-          //const token = data.token; // Asume que el token se devuelve desde el backend
-          //login(token);
-          navigate('/');
-          
+          const token = data.token; 
 
+          login(token);
+          navigate('/');
         } else {
           // Manejar la respuesta de error, por ejemplo, mostrar un mensaje de error.
         }

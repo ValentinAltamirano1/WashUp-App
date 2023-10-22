@@ -3,19 +3,21 @@ import { createContext, useContext, useState } from 'react';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [token, setToken] = useState(null);
-  const login = (token) => {
-    // Lógica de autenticación en el backend
-    // Si la autenticación es exitosa, llama a setIsAuthenticated(true)
-    setToken(token);
-    setIsAuthenticated(true);
+  // Recuperar el token de autenticación almacenado en localStorage
+  const initialToken = localStorage.getItem('authToken');
+  const [token, setToken] = useState(initialToken);
+  const isAuthenticated = !!token; // Verificar si el token existe
+
+  const login = (newToken) => {
+    // Al iniciar sesión, actualiza el token y guárdalo en localStorage
+    setToken(newToken);
+    localStorage.setItem('authToken', newToken);
   };
 
   const logout = () => {
-    // Lógica para cerrar la sesión del usuario
+    // Al cerrar sesión, elimina el token de localStorage
     setToken(null);
-    setIsAuthenticated(false);
+    localStorage.removeItem('authToken');
   };
 
   return (

@@ -5,12 +5,13 @@ import navIcon1 from '../assets/img/nav-icon3.svg';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
+import { useAuth } from './AuthContext';
 
-export const NavBar = ({ isAuthenticated }) => {
+export const NavBar = () => {
   const navigate = useNavigate();
   const [activeLink, setActiveLink] = useState('home');
   const [scrolled, setScrolled] = useState(false);
-
+  const {isAuthenticated} = useAuth();
   useEffect(() => {
     const onScroll = () => {
       if (window.scrollY > 10) {
@@ -53,7 +54,7 @@ export const NavBar = ({ isAuthenticated }) => {
                 <a href="#"><img src={navIcon1} alt="" /></a>
               </div>
               {isAuthenticated ? (
-                <Button variant="contained" className="btn btn-lg vvd-btn" onClick={() => navigate('/about-us')}>Reservar</Button>
+                <Button variant="contained" className="btn btn-lg vvd-btn connect-button" onClick={() => navigate('/about-us')}>Reservar</Button>
               ) : (
                 <Button variant="contained" className="btn btn-lg vvd-btn connect-button" onClick={() => navigate('/login')}>Connect</Button>
               )}

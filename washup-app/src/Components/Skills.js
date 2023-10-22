@@ -8,10 +8,7 @@ import picture6 from "../assets/img/ArmorAll-Carpet-Upholstery-Cleaner.png";
 import picture7 from "../assets/img/LeatherHoney-Cleaner.png";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import arrow1 from "../assets/img/arrow1.svg";
-import arrow2 from "../assets/img/arrow2.svg";
 
-import { Row, Col, Container } from 'react-bootstrap';
 
 export const Skills = () => {
   const responsive = {

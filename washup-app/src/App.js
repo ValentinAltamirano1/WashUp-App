@@ -4,18 +4,23 @@ import Home from './Components/Home';
 import Login from './Components/Login';
 import Services from './Components/Services';
 import { AboutUs } from './Components/AboutUs';
+import { AuthProvider } from './Components/AuthContext';
+import Dashboard from './Components/AdminComponents/Dashboard'; 
 
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/aboutUs" element={<AboutUs />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 

@@ -333,3 +333,10 @@ input {
   font-size: 14px;
   margin-top: 10px;
 }
+
+.success-message {
+  color: green;
+  text-align: center;
+  margin-top: 10px;
+}
+

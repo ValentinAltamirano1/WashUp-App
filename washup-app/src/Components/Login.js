@@ -89,10 +89,14 @@ const Login = () => {
 
     setErrorMessage('');
 
+    if(email==="admin@washup.com" && password==="admin"){
+      navigate('/dashboard');
+    }
+
     if(email.endsWith('@washup.com')){
       try {
         // Realizar una petición a /empleados
-        const response = await fetch('http://localhost:4000/employee', {
+        const response = await fetch('http://localhost:4000/employeelogin', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -109,12 +113,8 @@ const Login = () => {
           //const token = data.token; // Asume que el token se devuelve desde el backend
       
           //login(token); 
-          if (data.email === 'coti@washup.com') {
-            navigate('/dashboard');
-          } else {
-            //login(token);
-            navigate('/empleados');
-          }
+      
+          navigate('/dashboard'); 
   
         } else {
           // Manejar la respuesta de error, por ejemplo, mostrar un mensaje de error.
@@ -233,8 +233,8 @@ const LoginForm = ({ email, password, setEmail, setPassword, handleLoginForm, er
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet"></link>
     <form action="#">
       <h1>Login here</h1>
-      <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-      <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+      <input type="text" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+      <input type="password" name="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
       <div className="content">
         <div className="checkbox">
           <input type="checkbox" id="remember-me" />

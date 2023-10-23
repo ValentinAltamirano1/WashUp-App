@@ -704,3 +704,15 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   letter-spacing: 0.5px;
   margin-top: 20px;
 }
+
+/************ Reset Pasword Css ************/
+.reset-container {
+  background-color: #2596be;
+  border-radius: 20px;
+  padding: 20px;
+  max-width: 700px; /* Ajusta el ancho máximo según tus necesidades */
+  margin: 40px auto 0 ; /* Centra el contenedor horizontalmente */
+  text-align: center;
+  color: white; /* Color del texto en el contenedor */
+
+}

@@ -6,6 +6,7 @@ import Services from './Components/Services';
 import { AboutUs } from './Components/AboutUs';
 import { AuthProvider } from './Components/AuthContext';
 import Dashboard from './Components/AdminComponents/Dashboard'; 
+import ResetPassword from './Components/ResetPassword';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/resetpassword" element={<ResetPassword />} />
         </Routes>
       </Router>
     </AuthProvider>

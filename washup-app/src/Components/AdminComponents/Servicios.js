@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -8,20 +8,15 @@ import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { useNavigate } from 'react-router-dom';
 import { MainListItems } from './ListItems';
-import Chart from './Chart';
-import Deposits from './Deposits';
-import Orders from './Order';
- 
+import Grid from '@mui/material/Grid';
+import { FormControl, FormLabel, TextField, RadioGroup, FormControlLabel, Radio, Select, MenuItem, InputLabel, Button} from '@mui/material';
+
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -35,8 +30,36 @@ function Copyright(props) {
   );
 }
  
-const drawerWidth = 240;
+export const getDepartment = () => ([
+    { id: '1', title: 'Montevideo' },
+    { id: '2', title: 'Artigas' },
+    { id: '3', title: 'Canelones' },
+    { id: '4', title: 'Cerro Largo' },
+    { id: '5', title: 'Colonia' },
+    { id: '6', title: 'Durazno' },
+    { id: '7', title: 'Flores' },
+    { id: '8', title: 'Florida' },
+    { id: '9', title: 'Lavalleja' },
+    { id: '10', title: 'Maldonado' },
+    { id: '11', title: 'Paysandu' },
+    { id: '12', title: 'Rio Negro' },
+    { id: '13', title: 'Rivera' },
+    { id: '14', title: 'Rocha' },
+    { id: '15', title: 'Salto' },
+    { id: '16', title: 'San Jose' },
+    { id: '17', title: 'Soriano' },
+    { id: '18', title: 'Tacuarembo' },
+    { id: '19', title: 'Treinta y Tres' },
+   
+])
  
+const genderItems = [
+    { id: 'male', title: 'Male' },
+    { id: 'female', title: 'Female' },
+    { id: 'other', title: 'Other' },
+]
+ 
+const drawerWidth = 240;
  
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -85,12 +108,80 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
  
-export default function Dashboard() {
-  const [open, setOpen] = React.useState(true);
-  const toggleDrawer = () => {
-    setOpen(!open);
-  };
-  const navigate = useNavigate();
+export default function ServiciosAdmin(props) {
+    const [open, setOpen] = React.useState(true);
+    const toggleDrawer = () => {
+        setOpen(!open);
+    };
+    const navigate = useNavigate();
+ 
+    const initialValues = {
+        fullname: '',
+        email: '',
+        password: '',
+        passwordConfirm: '',
+        gender: '',
+        hireDate: '',
+    };
+ 
+    const { addOrEdit, recordForEdit } = props
+ 
+    const validate = (fieldValues = values) => {
+        let temp = { ...errors }
+        if ('fullName' in fieldValues)
+            temp.fullName = fieldValues.fullName ? "" : "This field is required."
+        if ('email' in fieldValues)
+            temp.email = (/$^|.+@.+..+/).test(fieldValues.email) ? "" : "Email is not valid."
+        if ('mobile' in fieldValues)
+            temp.mobile = fieldValues.mobile.length > 9 ? "" : "Minimum 10 numbers required."
+        if ('departmentId' in fieldValues)
+            temp.departmentId = fieldValues.departmentId.length != 0 ? "" : "This field is required."
+        setErrors({
+            ...temp
+        })
+ 
+        if (fieldValues == values)
+            return Object.values(temp).every(x => x == "")
+    }
+ 
+    const handleSubmit = e => {
+        e.preventDefault()
+        if (validate()) {
+            addOrEdit(values, resetForm);
+        }
+    }
+ 
+    const [values, setValues] = useState({
+        fullname: '',
+        email: '',
+        password: '',
+        passwordConfirm: '',
+        gender: '',
+        hireDate: '',
+    });
+   
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setValues({
+            ...values,
+            [name]: value
+        });
+    };
+ 
+    useEffect(() => {
+        if (recordForEdit != null)
+            setValues({
+                ...recordForEdit
+            })
+    }, [recordForEdit])
+ 
+    const [errors, setErrors] = useState({});
+ 
+    const resetForm = () => {
+        setValues(initialValues);
+        setErrors({});
+    };
+ 
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -120,7 +211,7 @@ export default function Dashboard() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Panel
+              Servicios
             </Typography>
             <Button
               color="inherit"
@@ -151,58 +242,7 @@ export default function Dashboard() {
             <MainListItems />
           </List>
         </Drawer>
-        <Box
-          component="main"
-          sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
-            flexGrow: 1,
-            height: '100vh',
-            overflow: 'auto',
-          }}
-        >
-          <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <Chart />
-                </Paper>
-              </Grid>
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <Deposits />
-                </Paper>
-              </Grid>
-              {/* Recent Orders */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Orders />
-                </Paper>
-              </Grid>
-            </Grid>
-            <Copyright sx={{ pt: 4 }} />
-          </Container>
-        </Box>
       </Box>
     </ThemeProvider>
-  );
+    );
 }

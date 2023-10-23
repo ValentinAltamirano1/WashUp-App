@@ -8,7 +8,7 @@ import { AuthProvider } from './Components/AuthContext';
 import Dashboard from './Components/AdminComponents/Dashboard'; 
 import Empleados from './Components/AdminComponents/Empleados';
 import ServiciosAdmin from './Components/AdminComponents/Servicios';
-
+import ResetPassword from './Components/ResetPassword';
 
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/employee" element={<Empleados />} />  
           <Route path="/services/admin" element={<ServiciosAdmin />} />
+          <Route path="/resetpassword" element={<ResetPassword />} />
         </Routes>
       </Router>
     </AuthProvider>

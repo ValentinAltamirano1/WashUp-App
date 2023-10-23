@@ -1,7 +1,7 @@
 import './login.css';
 import React, { useState,useEffect } from 'react';
 import { validateEmail } from './utils'; 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 
 
@@ -25,6 +25,12 @@ const Login = () => {
       return () => clearTimeout(timeout);
     }
   }, [showMessage]);
+
+  useEffect(() => {
+    setUsername('');
+    setPassword('');
+    setEmail('');
+  }, [isLoginForm]);
 
   const handleRegisterForm = async () => {
 
@@ -89,70 +95,47 @@ const Login = () => {
 
     setErrorMessage('');
 
-    if(email==="admin@washup.com" && password==="admin"){
+    let endpoint;
+
+    if (email === "admin@washup.com" && password === "admin") {
       navigate('/dashboard');
+      
+    } else if (email.endsWith('@washup.com')) {
+      endpoint = 'http://localhost:4000/employeelogin';
+    } else {
+      endpoint = 'http://localhost:4000/login';
     }
-
-    if(email.endsWith('@washup.com')){
-      try {
-        // Realizar una petición a /empleados
-        const response = await fetch('http://localhost:4000/employeelogin', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: emailValue,
-            password: passwordValue,
-          }),
-        });
-        if (response.ok) {
-          // Manejar la respuesta exitosa, por ejemplo
-          
-          const data = await response.json();
-          //const token = data.token; // Asume que el token se devuelve desde el backend
-      
-          //login(token); 
-      
-          navigate('/dashboard'); 
   
-        } else {
-          // Manejar la respuesta de error, por ejemplo, mostrar un mensaje de error.
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    }else{
-      try {
-        const response = await fetch('http://localhost:4000/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: emailValue,
-            password: passwordValue,
-          }),
-        });
-    
-        if (response.ok) {
-          // Manejar la respuesta exitosa, por ejemplo
-          
-          const data = await response.json();
-          //const token = data.token; // Asume que el token se devuelve desde el backend
-          //login(token);
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: emailValue,
+          password: passwordValue,
+        }),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        if (endpoint === 'http://localhost:4000/login') {
+          const token = data.token;
+          login(token);
           navigate('/');
-          
-
-        } else {
-          // Manejar la respuesta de error, por ejemplo, mostrar un mensaje de error.
+        } else if (endpoint === 'http://localhost:4000/employeelogin') {
+          //const token = data.token;
+          //login(token);
+          navigate('/dashboard');
         }
-      } catch (error) {
-        console.error('Error:', error);
+      } else {
+        // Manejar la respuesta de error, por ejemplo, mostrar un mensaje de error.
       }
+    } catch (error) {
+      console.error('Error:', error);
     }
   };
-
 
   const handleFormChange = (isLoginForm) => {
     setIsLoginForm(isLoginForm);
@@ -241,11 +224,11 @@ const LoginForm = ({ email, password, setEmail, setPassword, handleLoginForm, er
           <label htmlFor="remember-me">Remember me</label>
         </div>
         <div className="pass-link">
-          <a href="#">Forgot password?</a>
+          <Link to="/resetpassword">Forgot password?</Link>
         </div>
       </div>
       {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Mostrar mensaje de error */}
-      <button onClick={handleLoginForm}>Login</button>
+      <button  type="button" onClick={handleLoginForm}>Login</button>
       <div className="social-container">
         <a href="#" className="social">
           <i className="lni lni-google"></i>

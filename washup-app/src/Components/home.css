@@ -276,6 +276,23 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 }
 
 
+/* Estilos para el botón de cierre de sesión */
+.navbar-text .logout-button {
+  font-weight: 700;
+  color: #2596be !important;
+  font-size: 20px;
+  margin-right: 18px;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out; /* Cambia el color al pasar el cursor */
+}
+
+.logout-button:hover {
+  box-shadow: 0 0 5px rgba(37, 150, 190, 0.5); /* Agrega una sombra al pasar el cursor */
+}
+
 /************ Banner Css ************/
 .banner {
   margin-top: 0;

@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { validateEmail } from './utils';
 
 const ResetPassword = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleResetPassword = async () => {
+    if (!email) {
+      setMessage('Por favor, ingrese su correo electrónico.');
+      return;
+    }
+    if (!validateEmail(email)) {
+        setErrorMessage('Por favor, ingrese un correo electrónico válido.');
+        return;
+      }
     try {
       const response = await fetch('/reset-password', {
         method: 'POST',
@@ -41,6 +51,7 @@ const ResetPassword = () => {
           style={{ borderRadius: '20px', border: '1px solid #2596be',backgroundColor: '#e2f5fc' }}
         />
         <button style={{ marginLeft: '10px' }} onClick={handleResetPassword}>Solicitar</button>
+        {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Mostrar mensaje de error */}
         <p>{message}</p>
       </div>
     </div>

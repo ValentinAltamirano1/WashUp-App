@@ -16,8 +16,8 @@ import { useNavigate } from 'react-router-dom';
 import { MainListItems } from './ListItems';
 import Grid from '@mui/material/Grid';
 import { FormControl, FormLabel, TextField, RadioGroup, FormControlLabel, Radio, Select, MenuItem, InputLabel, Button} from '@mui/material';
- 
- 
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
  
  
 function Copyright(props) {
@@ -119,12 +119,14 @@ export default function Empleados(props) {
     const navigate = useNavigate();
  
     const initialValues = {
-        fullname: '',
-        email: '',
-        password: '',
-        passwordConfirm: '',
-        gender: '',
-        hireDate: '',
+      fullName: '', 
+      email: '',
+      password: '',
+      mobile: '',
+      city: '',
+      birthdate: null,
+      gender: '',
+      departmentId: '', 
     };
  
     const { addOrEdit, recordForEdit } = props
@@ -155,20 +157,22 @@ export default function Empleados(props) {
     }
  
     const [values, setValues] = useState({
-        fullname: '',
+        fullame: '',
         email: '',
         password: '',
-        passwordConfirm: '',
+        mobile: '',
+        city: '',
+        birthdate:null,
         gender: '',
         hireDate: '',
     });
    
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setValues({
-            ...values,
-            [name]: value
-        });
+      const { name, value } = e.target;
+      setValues({
+          ...values,
+          [name]: value
+      });
     };
  
     useEffect(() => {
@@ -183,6 +187,11 @@ export default function Empleados(props) {
     const resetForm = () => {
         setValues(initialValues);
         setErrors({});
+    };
+
+    const [birthdate, setbirthdate] = useState(null); // Estado para almacenar la fecha seleccionada
+    const handleFechaChange = (date) => {
+      setbirthdate(date);
     };
  
   return (
@@ -246,117 +255,131 @@ export default function Empleados(props) {
           </List>
         </Drawer>
       </Box>
-      <div className="content" style={{ width: '100%', maxWidth: '100%' }} >
-            <form onSubmit={handleSubmit}>
-                <Box mt={20}>
-                    <Grid container direction="column" spacing={3}>
-                        {/* TextFields */}
-                        <Grid item>
-                            <TextField
-                                fullWidth
-                                variant="outlined"
-                                size="medium"
-                                name="fullName"
-                                label="Nombre completo"
-                                value={values.fullName}
-                                onChange={handleInputChange}
-                                error={errors.fullName}
-                            />
-                        </Grid>
-                        
-                        <Grid item>
-                            <TextField
-                                fullWidth
-                                variant="outlined"
-                                size="medium"
-                                label="Email"
-                                name="email"
-                                value={values.email}
-                                onChange={handleInputChange}
-                                error={errors.email}
-                            />
-                        </Grid>
-
-                        <Grid item>
-                            <TextField
-                                fullWidth
-                                variant="outlined"
-                                size="medium"
-                                label="Celular"
-                                name="mobile"
-                                value={values.mobile}
-                                onChange={handleInputChange}
-                                error={errors.mobile}
-                            />
-                        </Grid>
-
-                        <Grid item>
-                            <TextField
-                                fullWidth
-                                variant="outlined"
-                                size="medium"
-                                label="Ciudad"
-                                name="city"
-                                value={values.city}
-                                onChange={handleInputChange}
-                            />
-                        </Grid>
-                        
-                        {/* RadioGroup */}
-                        <Grid item>
-                            <FormControl fullWidth variant="outlined">
-                                <FormLabel component="legend" align="left">Gender</FormLabel>
-                                <RadioGroup row name="gender" value={values.gender} onChange={handleInputChange}>
-                                    {genderItems.map((item) => (
-                                        <FormControlLabel key={item.id} value={item.id} control={<Radio />} label={item.title} />
-                                    ))}
-                                </RadioGroup>
-                            </FormControl>
-                        </Grid>
-
-                        {/* DropDown */}
-                        <Grid item>
-                            <FormControl fullWidth variant="outlined">
-                                <InputLabel id="departamento">Departamento</InputLabel>                
-                                <Select
-                                    name="departmentId"
-                                    value={values.departmentId}
-                                    onChange={handleInputChange}
-                                    label="departamento"
-                                >
-                                    {getDepartment().map((item) => (
-                                        <MenuItem key={item.id} value={item.id}>
-                                            {item.title}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
-                        </Grid>
-
-                        {/* Botones */}
-                        <Grid item>
-                            <div>
-                                <Button
-                                    type="submit"
-                                    variant="contained"
-                                    color="primary"
-                                    style={{ marginRight: '20px', backgroundColor:'#2596be' }}
-                                >
-                                    Submit
-                                </Button>
-                                <Button
-                                    variant="contained"
-                                    onClick={resetForm}
-                                    style={{ marginRight: '20px', backgroundColor:'#2596be' }}
-                                >
-                                    Reset
-                                </Button>
-                            </div>
-                        </Grid>
-                    </Grid>
-                </Box>
-            </form>
-        </div>  
+      <div className="content" style={{ width: '100%', maxWidth: '100%', marginTop: '60px' }}>
+        <form onSubmit={handleSubmit}>
+          <h1 style={{ color: '#2596be', fontSize: '32px', fontWeight: 'bold', marginBottom: '55px', textAlign: 'center', textShadow: '0 0 10px rgba(16, 46, 74, 0.5' }}>Ingrese un empleado</h1>
+          <Grid container spacing={3}>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                variant="outlined"
+                size="medium"
+                name="fullName"
+                label="Nombre completo"
+                value={values.fullName}
+                onChange={handleInputChange}
+                error={errors.fullName}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                variant="outlined"
+                size="medium"
+                label="Email"
+                name="email"
+                value={values.email}
+                onChange={handleInputChange}
+                error={errors.email}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                variant="outlined"
+                size="medium"
+                label="Password"
+                name="password"
+                value={values.password}
+                onChange={handleInputChange}
+                error={errors.password}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                variant="outlined"
+                size="medium"
+                label="Celular"
+                name="mobile"
+                value={values.mobile}
+                onChange={handleInputChange}
+                error={errors.mobile}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                variant="outlined"
+                size="medium"
+                label="Ciudad"
+                name="city"
+                value={values.city}
+                onChange={handleInputChange}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <FormControl fullWidth variant="outlined">
+                <InputLabel id="departamento" style={{ fontSize: '14px' }}>Departamento</InputLabel>
+                <Select
+                  name="departmentId"
+                  value={values.departmentId}
+                  onChange={handleInputChange}
+                  label="departamento"
+                  style={{ padding: '0px ' }}
+                >
+                  {getDepartment().map((item) => (
+                    <MenuItem key={item.id} value={item.id}>
+                      {item.title}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={6}>
+              <FormLabel component="legend" align="left" style={{ fontSize: '14px' }}>Fecha de nacimiento</FormLabel>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <DatePicker
+                  selected={birthdate}
+                  onChange={handleFechaChange}
+                  dateFormat="P"
+                  className="select"
+                  style={{ width: '100%', border: '1px solid #2596be', borderRadius: '5px' }}
+                />
+              </div>
+            </Grid>
+            <Grid item xs={6}>
+              <FormControl fullWidth variant="outlined">
+                <FormLabel component="legend" align="left" style={{ fontSize: '14px' }}>Gender</FormLabel>
+                <RadioGroup row name="gender" value={values.gender} onChange={handleInputChange}>
+                  {genderItems.map((item) => (
+                    <FormControlLabel key={item.id} value={item.id} control={<Radio />} label={item.title} />
+                  ))}
+                </RadioGroup>
+              </FormControl>
+            </Grid>
+            <Grid item xs={6}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                style={{ backgroundColor: '#2596be', width: '100%' }}
+              >
+                Submit
+              </Button>
+            </Grid>
+            <Grid item xs={6}>
+              <Button
+                variant="contained"
+                onClick={resetForm}
+                style={{ backgroundColor: '#2596be', width: '100%' }}
+              >
+                Reset
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
+      </div>
     </ThemeProvider>
   );
 }

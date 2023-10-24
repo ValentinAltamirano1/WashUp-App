@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -12,55 +12,14 @@ import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { useNavigate } from 'react-router-dom';
-import { MainListItems } from './ListItems';
+import { MainListItems} from './ListItems';
 import Grid from '@mui/material/Grid';
-import { FormControl, FormLabel, TextField, RadioGroup, FormControlLabel, Radio, Select, MenuItem, InputLabel, Button} from '@mui/material';
+import {  TextField, Button,  FormControl, InputLabel, OutlinedInput, InputAdornment } from '@mui/material';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        WashUp
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
- 
-export const getDepartment = () => ([
-    { id: '1', title: 'Montevideo' },
-    { id: '2', title: 'Artigas' },
-    { id: '3', title: 'Canelones' },
-    { id: '4', title: 'Cerro Largo' },
-    { id: '5', title: 'Colonia' },
-    { id: '6', title: 'Durazno' },
-    { id: '7', title: 'Flores' },
-    { id: '8', title: 'Florida' },
-    { id: '9', title: 'Lavalleja' },
-    { id: '10', title: 'Maldonado' },
-    { id: '11', title: 'Paysandu' },
-    { id: '12', title: 'Rio Negro' },
-    { id: '13', title: 'Rivera' },
-    { id: '14', title: 'Rocha' },
-    { id: '15', title: 'Salto' },
-    { id: '16', title: 'San Jose' },
-    { id: '17', title: 'Soriano' },
-    { id: '18', title: 'Tacuarembo' },
-    { id: '19', title: 'Treinta y Tres' },
-   
-])
- 
-const genderItems = [
-    { id: 'male', title: 'Male' },
-    { id: 'female', title: 'Female' },
-    { id: 'other', title: 'Other' },
-]
- 
-const drawerWidth = 240;
- 
+const defaultTheme = createTheme();
+
+const drawerWidth = 180;
+
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
@@ -78,7 +37,7 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
 }));
- 
+
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     '& .MuiDrawer-paper': {
@@ -104,89 +63,38 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     },
   }),
 );
- 
-// TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
- 
-export default function ServiciosAdmin(props) {
-    const [open, setOpen] = React.useState(true);
-    const toggleDrawer = () => {
-        setOpen(!open);
-    };
-    const navigate = useNavigate();
- 
-    const initialValues = {
-        fullname: '',
-        email: '',
-        password: '',
-        passwordConfirm: '',
-        gender: '',
-        hireDate: '',
-    };
- 
-    const { addOrEdit, recordForEdit } = props
- 
-    const validate = (fieldValues = values) => {
-        let temp = { ...errors }
-        if ('fullName' in fieldValues)
-            temp.fullName = fieldValues.fullName ? "" : "This field is required."
-        if ('email' in fieldValues)
-            temp.email = (/$^|.+@.+..+/).test(fieldValues.email) ? "" : "Email is not valid."
-        if ('mobile' in fieldValues)
-            temp.mobile = fieldValues.mobile.length > 9 ? "" : "Minimum 10 numbers required."
-        if ('departmentId' in fieldValues)
-            temp.departmentId = fieldValues.departmentId.length != 0 ? "" : "This field is required."
-        setErrors({
-            ...temp
-        })
- 
-        if (fieldValues == values)
-            return Object.values(temp).every(x => x == "")
-    }
- 
-    const handleSubmit = e => {
-        e.preventDefault()
-        if (validate()) {
-            addOrEdit(values, resetForm);
-        }
-    }
- 
-    const [values, setValues] = useState({
-        fullname: '',
-        email: '',
-        password: '',
-        passwordConfirm: '',
-        gender: '',
-        hireDate: '',
+
+export default function Servicios(props) {
+  const [open, setOpen] = React.useState(true);
+  const toggleDrawer = () => {
+    setOpen(!open);
+  };
+
+  // Define el estado para los campos del formulario
+  const [serviceData, setServiceData] = useState({
+    serviceType: '',
+    price: '',
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setServiceData({
+      ...serviceData,
+      [name]: value,
     });
-   
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setValues({
-            ...values,
-            [name]: value
-        });
-    };
- 
-    useEffect(() => {
-        if (recordForEdit != null)
-            setValues({
-                ...recordForEdit
-            })
-    }, [recordForEdit])
- 
-    const [errors, setErrors] = useState({});
- 
-    const resetForm = () => {
-        setValues(initialValues);
-        setErrors({});
-    };
- 
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Envía los datos del servicio al servidor o realiza alguna acción necesaria
+    console.log('Datos del servicio:', serviceData);
+  };
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open} sx={{backgroundColor: '#2596be'}}>
+        <AppBar position="absolute" open={open} sx={{ backgroundColor: '#2596be' }}>
           <Toolbar
             sx={{
               pr: '24px', // keep right padding when drawer closed
@@ -213,15 +121,6 @@ export default function ServiciosAdmin(props) {
             >
               Servicios
             </Typography>
-            <Button
-              color="inherit"
-              onClick={() => {
-                navigate('/');
-                toggleDrawer();
-              }}
-            >
-              Cerrar sesión
-            </Button>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -243,6 +142,57 @@ export default function ServiciosAdmin(props) {
           </List>
         </Drawer>
       </Box>
+      <div className="content" style={{ }}>
+        <form onSubmit={handleSubmit}>
+        <h1 style={{ color: '#2596be', fontSize: '32px', fontWeight: 'bold', marginBottom: '25px', textAlign: 'center', textShadow: '0 0 10px rgba(16, 46, 74, 0.5' }}>Crear un servicio</h1>
+          <div style={{ background: '#e2f5fc', borderRadius: '20px', padding: '20px' }}>
+            <Grid container spacing={3}>
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  size="medium"
+                  name="serviceType"
+                  label="Tipo de servicio"
+                  value={serviceData.serviceType}
+                  onChange={handleInputChange}
+                  
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <FormControl fullWidth>
+                      <InputLabel htmlFor="precio">Precio</InputLabel>
+                      <OutlinedInput
+                        id="precio"
+                        startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                        label="Precio"
+                      />
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  
+                  style={{ backgroundColor: '#2596be', width: '100%' }}
+                >
+                  Crear Servicio
+                </Button>
+              </Grid>
+            </Grid>
+          </div>
+        </form>
+      </div>
+      <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 50, py: 2, px: 3 }}>
+        {'Copyright © '}
+        <Link color="inherit" href="https://mui.com/">
+          WashUp
+        </Link>
+        {' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
     </ThemeProvider>
-    );
+  );
 }
+

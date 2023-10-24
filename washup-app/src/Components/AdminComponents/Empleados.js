@@ -18,20 +18,7 @@ import Grid from '@mui/material/Grid';
 import { FormControl, FormLabel, TextField, RadioGroup, FormControlLabel, Radio, Select, MenuItem, InputLabel, Button} from '@mui/material';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
- 
- 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        WashUp
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+
  
 export const getDepartment = () => ([
     { id: '1', title: 'Montevideo' },
@@ -380,6 +367,15 @@ export default function Empleados(props) {
           </Grid>
         </form>
       </div>
+      <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 50, py: 2, px: 3 }}>
+        {'Copyright © '}
+        <Link color="inherit" href="https://mui.com/">
+          WashUp
+        </Link>
+        {' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
     </ThemeProvider>
   );
 }

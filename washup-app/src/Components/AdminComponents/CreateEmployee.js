@@ -70,6 +70,14 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 function EmployeeRegistrationForm () {
 
+    const [showMessage, setShowMessage] = useState(false);
+    const [open, setOpen] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const toggleDrawer = () => {
+      setOpen(!open);
+    };
+  
     useEffect(() => {
         if (showMessage) {
           const timeout = setTimeout(() => {
@@ -80,15 +88,8 @@ function EmployeeRegistrationForm () {
         }
       }, [showMessage]);
 
-    const [showMessage, setShowMessage] = useState(false);
 
-    const [open, setOpen] = useState(false);
-
-    const toggleDrawer = () => {
-      setOpen(!open);
-    };
-  
-    const [errorMessage, setErrorMessage] = useState('');
+ 
     
     const navigate = useNavigate();
 
@@ -127,9 +128,9 @@ function EmployeeRegistrationForm () {
     const handleFormReset = () => {
         setFormData({
           fullName: '',
+          credentialID: '',
           email: '',
           password: '',
-          credentialID: '',
           mobile: '',
           birthDate: '',
           gender: '',
@@ -196,11 +197,11 @@ function EmployeeRegistrationForm () {
         
         // Obtener los valores más recientes de los campos
         const usernameValue = formData.fullName; 
-        const credentialidValue = formData.credentialid;
+        const credentialidValue = formData.credentialID;
         const emailValue = formData.email;
         const passwordValue = formData.password;
         const mobileValue = formData.mobile;
-        const birthdateValue = formData.birthdate;
+        const birthdateValue = formData.birthDate;
         const genderValue = formData.gender;
         const departmentValue = formData.department;
         const addressValue = formData.adress;
@@ -329,7 +330,7 @@ function EmployeeRegistrationForm () {
             </div>
             <div className="employee-input-box">
               <label>Cedula de Identidad</label>
-              <input type="text" name="credentialID" placeholder="Ingresar CI" required value={formData.credentialID} onChange={handleInputChange} />
+              <input type="number" name="credentialID" placeholder="Ingresar CI" required value={formData.credentialID} onChange={handleInputChange} />
               {fieldErrors.credentialID && <div className="error-message">{fieldErrors.credentialID}</div>}
             </div>
             <div className="employee-column">
@@ -345,7 +346,7 @@ function EmployeeRegistrationForm () {
               </div>
             </div>
             <div className="employee-gender-box">
-              <h3 style={{ textAlign: 'left' }}>Genero</h3>
+            <label style={{textAlign:'left'}}>Genero</label>
               <div className="employee-gender-option">
                 <div className="employee-gender">
                   <input type="radio" id="check-male" name="gender" value="male" checked={formData.gender === 'male'} onChange={handleInputChange} />

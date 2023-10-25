@@ -6,9 +6,9 @@ import Services from './Components/Services';
 import { AboutUs } from './Components/AboutUs';
 import { AuthProvider } from './Components/AuthContext';
 import Dashboard from './Components/AdminComponents/Dashboard'; 
-import Empleados from './Components/AdminComponents/Empleados';
 import ServiciosAdmin from './Components/AdminComponents/Servicios';
 import ResetPassword from './Components/ResetPassword';
+import CreateEmployee from './Components/AdminComponents/CreateEmployee';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/employee" element={<Empleados />} />  
+          <Route path="/employee" element={<CreateEmployee />} />  
           <Route path="/services/admin" element={<ServiciosAdmin />} />
           <Route path="/resetpassword" element={<ResetPassword />} />
         </Routes>

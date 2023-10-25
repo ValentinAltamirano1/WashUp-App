@@ -18,7 +18,7 @@ import {  TextField, Button,  FormControl, InputLabel, OutlinedInput, InputAdorn
 
 const defaultTheme = createTheme();
 
-const drawerWidth = 180;
+const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -145,7 +145,7 @@ export default function Servicios(props) {
       <div className="content" style={{ }}>
         <form onSubmit={handleSubmit}>
         <h1 style={{ color: '#2596be', fontSize: '32px', fontWeight: 'bold', marginBottom: '25px', textAlign: 'center', textShadow: '0 0 10px rgba(16, 46, 74, 0.5' }}>Crear un servicio</h1>
-          <div style={{ background: '#e2f5fc', borderRadius: '20px', padding: '20px' }}>
+          <div style={{ background: '#e2f5fc', borderRadius: '20px', padding: '60px' }}>
             <Grid container spacing={3}>
               <Grid item xs={6}>
                 <TextField

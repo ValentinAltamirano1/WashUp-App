@@ -47,14 +47,14 @@ export const NavBar = () => {
               <Nav.Link as={Link} to="/about-us" className={`nav-link ${activeLink === 'about-us' ? 'active about-us' : ''}`} onClick={() => onUpdateActiveLink('about-us')}style={{ fontWeight: 400, color: '#2596be', letterSpacing: '0.8px', padding: '0 25px', fontSize: '18px', opacity: 0.75 }}>About us</Nav.Link>
               <Nav.Link href="#services" className={activeLink === 'services' ? 'active navbar-link' : 'navbar-link'} onClick={() => navigate('/services')}>Services</Nav.Link>
               <Nav.Link href="#locations" className={activeLink === 'locations' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('locations')}>Locations</Nav.Link>
-              <Nav.Link href="#products" className={activeLink === 'products' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('products')}>Products</Nav.Link>
+              <Nav.Link href="#reservations" className={activeLink === 'reservations' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('reservations')}>Reservations</Nav.Link>
             </Nav>
             <span className="navbar-text">
               <div className="social-icon">
                 <a href="#"><img src={navIcon1} alt="" /></a>
               </div>
               {isAuthenticated ? (
-                <Button variant="contained" className="btn btn-lg vvd-btn connect-button" onClick={() => navigate('/about-us')}>Reservar</Button>
+                <Button variant="contained" className="btn btn-lg vvd-btn connect-button" onClick={() => navigate('/makereservation')}>Reservar</Button>
               ) : (
                 <Button variant="contained" className="btn btn-lg vvd-btn connect-button" onClick={() => navigate('/login')}>Connect</Button>
               )}

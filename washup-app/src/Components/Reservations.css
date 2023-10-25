@@ -52,3 +52,14 @@ label {
 .btn-reservar:hover {
   background-color: #1e7d9d;
 }
+
+.fecha-disponible .react-datepicker__input-container input {
+  background-color: #fff; /* Fondo blanco para fechas disponibles */
+  color: #000; /* Texto negro para fechas disponibles */
+}
+
+.fecha-no-disponible .react-datepicker__input-container input {
+  background-color: #ff0000; /* Fondo rojo para fechas no disponibles */
+  color: #fff; /* Texto blanco para fechas no disponibles */
+}
+

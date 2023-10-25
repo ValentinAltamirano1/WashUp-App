@@ -121,7 +121,13 @@
     color: red;
     font-size: 14px;
     margin-top: 10px;
+}
+.employee-success-message {
+    color: green;
+    text-align: center;
+    margin-top: 10px;
   }
+
 /* Responsive */
 @media screen and (max-width: 500px) {
   .employee-form .employee-column {

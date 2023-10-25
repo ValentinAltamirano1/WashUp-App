@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Empleados.css';
 import {
@@ -70,6 +70,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 
 function ServiceRegistrationForm () {
+    const [showMessage, setShowMessage] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const [open, setOpen] = useState(false);
 
@@ -77,7 +79,28 @@ function ServiceRegistrationForm () {
       setOpen(!open);
     };
   
-    
+    useEffect(() => {
+        if (showMessage) {
+          const timeout = setTimeout(() => {
+            setShowMessage(false);
+          }, 5000); // 5000 milisegundos (5 segundos)
+      
+          return () => clearTimeout(timeout);
+        }
+      }, [showMessage]);
+
+    const validateField = (name, value) => {
+        switch (name) {
+            case 'name':
+                return value ? '' : 'Este campo es obligatorio.';
+            case 'price':
+                return value ? '' : 'Este campo es obligatorio.';
+            case 'description':
+                return value ? '' : 'Este campo es obligatorio.';
+          default:
+            return '';
+        }
+      };
 
     const navigate = useNavigate();
 
@@ -110,65 +133,53 @@ function ServiceRegistrationForm () {
 
     const [errors, setErrors] = useState({});
       
-    const validate = (fieldValues = formData) => {
-        let temp = { ...errors };
-    
-        if ('name' in fieldValues)
-          temp.name = fieldValues.name ? '' : 'This field is required.';
 
-        if ('price' in fieldValues)
-        temp.price = fieldValues.price ? '' : 'This field is required.';
-
-        if ('serviceDescription' in fieldValues)
-        temp.name = fieldValues.serviceDescription ? '' : 'This field is required.';
-
-        setErrors({
-          ...temp,
-        });
-    
-        return Object.values(temp).every((x) => x === '');
-      };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (validate()) {
-            // Obtener los valores más recientes de los campos
-            const nameValue = formData.nombre; 
-            const priceValue = formData.price;
-            const serviceDescriptionValue = formData.serviceDescription;
-        
-            // Para probar que los datos se estén pasando correctamente
-            console.log('nombre el servicio:', nameValue);
-            console.log('precio:', priceValue);
 
+        if (!formData.nombre || !formData.price || !formData.serviceDescription) {
+            setErrorMessage('Por favor, complete todos los campos.');
+            return;
+          }
         
-            // Restablecer el mensaje de error en caso de éxito
-            // setErrorMessage('');
-        
-            try {
-            const response = await fetch('http://localhost:4000/service', {
-                method: 'POST',
-                headers: {
-                'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                name: nameValue,
-                price: priceValue, 
-                serviceDescription: serviceDescriptionValue,
+        // Obtener los valores más recientes de los campos
+        const nameValue = formData.nombre; 
+        const priceValue = formData.price;
+        const serviceDescriptionValue = formData.serviceDescription;
+    
+        // Para probar que los datos se estén pasando correctamente
+        console.log('nombre el servicio:', nameValue);
+        console.log('precio:', priceValue);
 
-                }),
-            });
-        
-            if (response.ok) {
-                // Manejar la respuesta exitosa
-                //setShowMessage(true);
-            } else {
-                // Manejar la respuesta de error, por ejemplo, mostrar un mensaje de error.
-            }
-            } catch (error) {
-            console.error('Error:', error);
-            }
+    
+        // Restablecer el mensaje de error en caso de éxito
+        // setErrorMessage('');
+    
+        try {
+        const response = await fetch('http://localhost:4000/service', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+            name: nameValue,
+            price: priceValue, 
+            serviceDescription: serviceDescriptionValue,
+
+            }),
+        });
+    
+        if (response.ok) {
+            // Manejar la respuesta exitosa
+            setShowMessage(true);
+        } else {
+            // Manejar la respuesta de error, por ejemplo, mostrar un mensaje de error.
         }
+        } catch (error) {
+        console.error('Error:', error);
+        }
+        
         console.log('Datos del formulario:', formData);
         
         handleFormReset(); // Esto restablecerá el formulario después de enviar los datos.
@@ -238,6 +249,9 @@ function ServiceRegistrationForm () {
         <section className="employee-container">
           <h1 style={{ color: '#2596be', fontWeight: 'bold', textAlign: 'center', textShadow: '0 0 10px rgba(16, 46, 74, 0.5)' }}>Registro de Servicios</h1>
           <form action="#" className="employee-form">
+          {showMessage && (
+            <p className="employee-success-message"> Servicio Guardado exitosamente.</p>
+            )}
             <div className="employee-column">
                 <div className="employee-input-box">
                 <label>Nombre del servicio</label>
@@ -255,13 +269,20 @@ function ServiceRegistrationForm () {
                 InputProps={{
                     startAdornment: <InputAdornment position="start">$</InputAdornment>,
                 }}
-                    />
+                sx={{
+                    width: '200px',
+                    '& input': {
+                      padding: '12px 10px', // Ajusta el relleno vertical (altura) aquí
+                    }, marginTop: '10px'
+                  }}
+                />
                 </div> 
             </div>
             <div className="employee-input-box">
               <label>Descripcion del servicio</label>
               <input type="text" name="serviceDescription" placeholder="Ingresar descripcion del servicio" required value={formData.serviceDescription} onChange={handleInputChange} />
             </div>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
             <button onClick={handleSubmit}>Enviar</button>
           </form>
         </section>

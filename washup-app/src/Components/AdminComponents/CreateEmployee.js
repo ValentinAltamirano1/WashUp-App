@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Empleados.css';
 import {
@@ -69,6 +69,18 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 
 function EmployeeRegistrationForm () {
+
+    useEffect(() => {
+        if (showMessage) {
+          const timeout = setTimeout(() => {
+            setShowMessage(false);
+          }, 2000); // 5000 milisegundos (5 segundos)
+      
+          return () => clearTimeout(timeout);
+        }
+      }, [showMessage]);
+
+    const [showMessage, setShowMessage] = useState(false);
 
     const [open, setOpen] = useState(false);
 
@@ -223,7 +235,7 @@ function EmployeeRegistrationForm () {
     
         if (response.ok) {
             // Manejar la respuesta exitosa
-            //setShowMessage(true);
+            setShowMessage(true);
         } else {
             // Manejar la respuesta de error, por ejemplo, mostrar un mensaje de error.
         }
@@ -379,6 +391,9 @@ function EmployeeRegistrationForm () {
               {fieldErrors.adress && <div className="error-message">{fieldErrors.adress}</div>}
             </div>
             <button onClick={handleSubmit}>Enviar</button>
+            {showMessage && (
+            <p className="employee-success-message">Empleado guardado exitosamente.</p>
+            )}
           </form>
         </section>
       </div>

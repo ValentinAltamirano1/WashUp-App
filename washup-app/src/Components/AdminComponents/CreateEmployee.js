@@ -17,6 +17,7 @@ import { MainListItems } from './ListItems';
 import MuiAppBar from '@mui/material/AppBar';
 import MuiDrawer from '@mui/material/Drawer';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import { validateEmail } from '../utils';
 
 const defaultTheme = createTheme();
 
@@ -75,6 +76,8 @@ function EmployeeRegistrationForm () {
       setOpen(!open);
     };
   
+    const [errorMessage, setErrorMessage] = useState('');
+    
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -82,13 +85,24 @@ function EmployeeRegistrationForm () {
         email: '',
         password: '',
         mobile: '',
-        city: '',
-        birthdate: null,
+        birthDate: '',
         gender: '',
         department: '', 
         adress: '',
         credentialID: '',
     });
+
+    const [fieldErrors, setFieldErrors] = useState({
+        fullName: '',
+        email: '',
+        password: '',
+        credentialID: '',
+        mobile: '',
+        birthDate: '',
+        gender: '',
+        department: '',
+        adress: '',
+      });
       
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -106,8 +120,9 @@ function EmployeeRegistrationForm () {
           credentialID: '',
           mobile: '',
           birthDate: '',
-          gender: 'male',
-          department: 'Montevideo',
+          gender: '',
+          department: '',
+          adress: '',
         });
     
         setErrors({});
@@ -121,86 +136,105 @@ function EmployeeRegistrationForm () {
         });
       };
 
-    const [errors, setErrors] = useState({});
-      
-    const validate = (fieldValues = formData) => {
-        let temp = { ...errors };
-    
-        if ('fullName' in fieldValues)
-          temp.fullName = fieldValues.fullName ? '' : 'This field is required.';
-    
-        if ('email' in fieldValues)
-          temp.email = /$^|.+@.+..+/.test(fieldValues.email) ? '' : 'Email is not valid.';
-    
-        if ('mobile' in fieldValues)
-          temp.mobile = fieldValues.mobile.length > 9 ? '' : 'Minimum 10 numbers required.';
-    
-        if ('department' in fieldValues)
-          temp.department = fieldValues.department.length !== 0 ? '' : 'This field is required.';
-    
-        setErrors({
-          ...temp,
-        });
-    
-        return Object.values(temp).every((x) => x === '');
+    const validateField = (name, value) => {
+        switch (name) {
+            case 'fullName':
+                return value ? '' : 'Este campo es obligatorio.';
+            case 'email':
+                return validateEmail(value) ? '' : 'El correo no es válido.';
+            case 'password':
+                return value ? '' : 'Este campo es obligatorio.';
+            case 'credentialID':
+                return value ? '' : 'Este campo es obligatorio.';
+            case 'mobile':
+                return value ? '' : 'Este campo es obligatorio.';
+            case 'birthDate':
+                return value ? '' : 'Este campo es obligatorio.';
+            case 'gender':
+                return value ? '' : 'Este campo es obligatorio.';
+            case 'department':
+                return value ? '' : 'Este campo es obligatorio.';
+            case 'adress':
+                return value ? '' : 'Este campo es obligatorio.';
+          default:
+            return '';
+        }
       };
+
+    const [errors, setErrors] = useState({});
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (validate()) {
-            // Obtener los valores más recientes de los campos
-            const usernameValue = formData.fullName; 
-            const credentialidValue = formData.credentialid;
-            const emailValue = formData.email;
-            const passwordValue = formData.password;
-            const mobileValue = formData.mobile;
-            const birthdateValue = formData.birthdate;
-            const genderValue = formData.gender;
-            const departmentValue = formData.department;
-            const addressValue = formData.address;
+
+    const newFieldErrors = { ...fieldErrors };
+
+    for (const key in formData) {
+      const error = validateField(key, formData[key]);
+      newFieldErrors[key] = error;
+    }
+
+    setFieldErrors(newFieldErrors);
+
+    // Verificar si hay algún mensaje de error en los campos
+    const hasErrors = Object.values(newFieldErrors).some((error) => error);
+
+    if (hasErrors) {
+      return;
+    }
         
-            // Para probar que los datos se estén pasando correctamente
-            console.log('Username:', usernameValue);
-            console.log('Email:', emailValue);
-            console.log('Password:', passwordValue);
-        
-            // Restablecer el mensaje de error en caso de éxito
-            // setErrorMessage('');
-        
-            try {
-            const response = await fetch('http://localhost:4000/employee', {
-                method: 'POST',
-                headers: {
-                'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                fullName: usernameValue,
-                credentialID: credentialidValue, // Asegúrate de definir credentialidValue
-                email: emailValue,
-                password: passwordValue,
-                mobile: mobileValue,
-                birthDate: birthdateValue,
-                gender: genderValue,
-                department: departmentValue,
-                adress: addressValue,
-                
-                }),
-            });
-        
-            if (response.ok) {
-                // Manejar la respuesta exitosa
-                //setShowMessage(true);
-            } else {
-                // Manejar la respuesta de error, por ejemplo, mostrar un mensaje de error.
-            }
-            } catch (error) {
-            console.error('Error:', error);
-            }
+        // Obtener los valores más recientes de los campos
+        const usernameValue = formData.fullName; 
+        const credentialidValue = formData.credentialid;
+        const emailValue = formData.email;
+        const passwordValue = formData.password;
+        const mobileValue = formData.mobile;
+        const birthdateValue = formData.birthdate;
+        const genderValue = formData.gender;
+        const departmentValue = formData.department;
+        const addressValue = formData.adress;
+    
+        // Para probar que los datos se estén pasando correctamente
+        console.log('Username:', usernameValue);
+        console.log('Email:', emailValue);
+        console.log('Password:', passwordValue);
+    
+        // Restablecer el mensaje de error en caso de éxito
+        // setErrorMessage('');
+    
+        try {
+        const response = await fetch('http://localhost:4000/employee', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+            fullName: usernameValue,
+            credentialID: credentialidValue, // Asegúrate de definir credentialidValue
+            email: emailValue,
+            password: passwordValue,
+            mobile: mobileValue,
+            birthDate: birthdateValue,
+            gender: genderValue,
+            department: departmentValue,
+            adress: addressValue,
+            
+            }),
+        });
+    
+        if (response.ok) {
+            // Manejar la respuesta exitosa
+            //setShowMessage(true);
+        } else {
+            // Manejar la respuesta de error, por ejemplo, mostrar un mensaje de error.
         }
-        console.log('Datos del formulario:', formData);
-        
-        handleFormReset(); // Esto restablecerá el formulario después de enviar los datos.
-    };
+        } catch (error) {
+        console.error('Error:', error);
+        }
+    
+    console.log('Datos del formulario:', formData);
+    
+    handleFormReset(); // Esto restablecerá el formulario después de enviar los datos.
+};
 
     return (
         <div >
@@ -269,27 +303,33 @@ function EmployeeRegistrationForm () {
             <div className="employee-input-box">
               <label>Nombre completo</label>
               <input type="text" name="fullName" placeholder="Ingresar nombre completo" required value={formData.fullName} onChange={handleInputChange} />
+              {fieldErrors.fullName && <div className="error-message">{fieldErrors.fullName}</div>}
             </div>
             <div className="employee-input-box">
               <label>Email</label>
               <input type="text" name="email" placeholder="Ingresar Email" required value={formData.email} onChange={handleInputChange} />
+              {fieldErrors.email && <div className="error-message">{fieldErrors.email}</div>}
             </div>
             <div className="employee-input-box">
               <label>Contraseña</label>
               <input type="password" name="password" placeholder="Ingresar Contraseña" required value={formData.password} onChange={handleInputChange} />
+              {fieldErrors.password && <div className="error-message">{fieldErrors.password}</div>}
             </div>
             <div className="employee-input-box">
               <label>Cedula de Identidad</label>
               <input type="text" name="credentialID" placeholder="Ingresar CI" required value={formData.credentialID} onChange={handleInputChange} />
+              {fieldErrors.credentialID && <div className="error-message">{fieldErrors.credentialID}</div>}
             </div>
             <div className="employee-column">
               <div className="employee-input-box">
                 <label>Celular</label>
                 <input type="number" name="mobile" placeholder="Ingresar celular" required value={formData.mobile} onChange={handleInputChange} />
+                {fieldErrors.mobile && <div className="error-message">{fieldErrors.mobile}</div>}
               </div>
               <div className="employee-input-box">
                 <label>Fecha de nacimiento</label>
                 <input type="date" name="birthDate" placeholder="Enter birth date" required value={formData.birthDate} onChange={handleInputChange} />
+                {fieldErrors.birthDate && <div className="error-message">{fieldErrors.birthDate}</div>}
               </div>
             </div>
             <div className="employee-gender-box">
@@ -305,9 +345,10 @@ function EmployeeRegistrationForm () {
                 </div>
                 <div className="employee-gender">
                   <input type="radio" id="check-other" name="gender" value="other" checked={formData.gender === 'other'} onChange={handleInputChange} />
-                  <label htmlFor="check-other">Prefiero no especificar</label>
+                  <label htmlFor="check-other">Otro</label>
                 </div>
               </div>
+              {fieldErrors.gender && <div className="error-message">{fieldErrors.gender}</div>}
             </div>
             <div className="employee-input-box employee-address">
               <div className="employee-select-box">
@@ -333,9 +374,11 @@ function EmployeeRegistrationForm () {
                         <option>Treinta y Tres</option>
                 </select>
               </div>
-              <input type="text" name="address" placeholder="Ingresar direccion de residencia" required value={formData.address} onChange={handleInputChange} />
+              {fieldErrors.department && <div className="error-message">{fieldErrors.department}</div>}
+              <input type="text" name="adress" placeholder="Ingresar direccion de residencia" required value={formData.adress} onChange={handleInputChange} />
+              {fieldErrors.adress && <div className="error-message">{fieldErrors.adress}</div>}
             </div>
-            <button onClick={handleSubmit}>Submit</button>
+            <button onClick={handleSubmit}>Enviar</button>
           </form>
         </section>
       </div>

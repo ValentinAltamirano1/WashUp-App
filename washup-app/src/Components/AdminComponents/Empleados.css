@@ -117,6 +117,11 @@
   background: #134d63;
 }
 
+.employee-error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+  }
 /* Responsive */
 @media screen and (max-width: 500px) {
   .employee-form .employee-column {

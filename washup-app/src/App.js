@@ -9,6 +9,7 @@ import Dashboard from './Components/AdminComponents/Dashboard';
 import ResetPassword from './Components/ResetPassword';
 import CreateEmployee from './Components/AdminComponents/CreateEmployee';
 import CreateServices from './Components/AdminComponents/CreateServices';
+import EmployeeInterface from './Components/EmployeeInterface';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/employee" element={<CreateEmployee />} />  
           <Route path="/services/admin" element={<CreateServices />} />
           <Route path="/resetpassword" element={<ResetPassword />} />
+          <Route path="/employeeinterface" element={<EmployeeInterface />} />
         </Routes>
       </Router>
     </AuthProvider>

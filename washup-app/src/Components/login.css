@@ -57,12 +57,14 @@ a:hover {
   accent-color: #333;
   width: 12px;
   height: 12px;
+  margin-right: 5px;
 }
 
 .content label {
   font-size: 14px;
   user-select: none;
   padding-left: 5px;
+  height: 12px;
 }
 
 button {
@@ -326,4 +328,16 @@ input {
   line-height: 45px;
   text-align: center;
   margin-top: 50px;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+ 
+.success-message {
+  color: green;
+  text-align: center;
+  margin-top: 10px;
 }

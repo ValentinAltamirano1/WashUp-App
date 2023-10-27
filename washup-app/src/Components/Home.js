@@ -5,7 +5,6 @@ import { Skills } from './Skills';
 import { Project } from './Project';
 import { Footer } from './Footer';
 import { Locations } from './Locations'
-import Products from './Products'
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -18,7 +17,6 @@ const Home = () => {
       <Skills />
       <Project />
       <Locations />
-      <Products />
       <Footer/>
     </div>
   );

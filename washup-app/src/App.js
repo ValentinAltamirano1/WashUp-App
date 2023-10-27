@@ -6,10 +6,13 @@ import Services from './Components/Services';
 import { AboutUs } from './Components/AboutUs';
 import { AuthProvider } from './Components/AuthContext';
 import Dashboard from './Components/AdminComponents/Dashboard'; 
+import Reservations from './Components/Reservations';
+import MakeReservation from './Components/MakeReservation';
 import ResetPassword from './Components/ResetPassword';
 import CreateEmployee from './Components/AdminComponents/CreateEmployee';
 import CreateServices from './Components/AdminComponents/CreateServices';
 import EmployeeInterface from './Components/EmployeeInterface';
+
 
 function App() {
   return (
@@ -20,6 +23,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/services" element={<Services />} />
           <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/reservations" element={<Reservations />} />
+          <Route path="/makereservation" element={<MakeReservation />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/employee" element={<CreateEmployee />} />  
           <Route path="/services/admin" element={<CreateServices />} />

@@ -56,7 +56,7 @@ export const NavBar = () => {
               </div>
               {isAuthenticated ? (
                 <div>
-                  <Button variant="contained" className="btn btn-lg vvd-btn connect-button" onClick={() => navigate('/about-us')}>Reservar</Button>
+                  <Button variant="contained" className="btn btn-lg vvd-btn connect-button" onClick={() => navigate('/makereservation')}>Reservar</Button>
                   <IconButton size="small" onClick={logout} className="logout-button">
                     <ExitToAppIcon />
                   </IconButton>

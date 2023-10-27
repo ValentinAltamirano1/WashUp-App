@@ -206,30 +206,23 @@ function EmployeeRegistrationForm () {
         const departmentValue = formData.department;
         const addressValue = formData.adress;
     
-        // Para probar que los datos se estén pasando correctamente
-        console.log('Username:', usernameValue);
-        console.log('Email:', emailValue);
-        console.log('Password:', passwordValue);
-    
-        // Restablecer el mensaje de error en caso de éxito
-        // setErrorMessage('');
-    
         try {
         const response = await fetch('http://localhost:4000/employee', {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',
+          
             },
             body: JSON.stringify({
-            fullName: usernameValue,
-            credentialID: credentialidValue, // Asegúrate de definir credentialidValue
-            email: emailValue,
-            password: passwordValue,
-            mobile: mobileValue,
-            birthDate: birthdateValue,
-            gender: genderValue,
-            department: departmentValue,
-            adress: addressValue,
+            FullName: usernameValue,
+            Credential_id: credentialidValue, // Asegúrate de definir credentialidValue
+            Email: emailValue,
+            Password: passwordValue,
+            Mobile: mobileValue,
+            Birth_date: birthdateValue,
+            Gender: genderValue,
+            Department: departmentValue,
+            Adress: addressValue,
             
             }),
         });
@@ -313,6 +306,9 @@ function EmployeeRegistrationForm () {
         <section className="employee-container">
           <h1 style={{ color: '#2596be', fontWeight: 'bold', textAlign: 'center', textShadow: '0 0 10px rgba(16, 46, 74, 0.5)' }}>Registro de empleados</h1>
           <form action="#" className="employee-form">
+            {showMessage && (
+              <p className="success-message">Registro exitoso</p>
+            )}
             <div className="employee-input-box">
               <label>Nombre completo</label>
               <input type="text" name="fullName" placeholder="Ingresar nombre completo" required value={formData.fullName} onChange={handleInputChange} />

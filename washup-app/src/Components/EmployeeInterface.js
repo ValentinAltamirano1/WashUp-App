@@ -26,45 +26,61 @@ const EmployeeDashboard = () => {
     setReservations((prevReservations) => prevReservations.filter((r) => r.id !== reservation.id));
   };
 
+  const handleReservationCancel = (reservation) => {
+    setReservations((prevReservations) => [...prevReservations, reservation]);
+    setSelectedReservations((prevSelected) =>
+      prevSelected.filter((r) => r.id !== reservation.id)
+    );
+  };
+
   return (
-    <div className="employee-dashboard-container">
-      <header>
-        <div className="header-content">
-          <h2>{`Hola, ${employeeName}`}</h2>
-            <IconButton size="small" onClick={logout} className="logout-button">
-                <ExitToAppIcon />
-            </IconButton>
-        </div>
-      </header>
-      <main>
+    <div className="employee-interface">
+    <header className="employee-interface-header">
+      <h2 className="employee-name">Hola, {employeeName}</h2>
+      <IconButton size="small" onClick={logout} className="employee-logout-button">
+        <ExitToAppIcon />
+      </IconButton>
+    </header>
+    <main className="employee-interface-main">
+      <div className="reservations-box">
         <h3>Reservas Disponibles:</h3>
         <ul>
           {reservations.map((reservation) => (
             <li key={reservation.id}>
-              {reservation.customer} - {reservation.date}
-              <button onClick={() => handleReservationSelect(reservation)}>Seleccionar</button>
+              <div className="reservation-details">
+                <div className="reservation-text">
+                  {reservation.customer} - {reservation.date}
+                </div>
+                <button className="confirm-button" onClick={() => handleReservationSelect(reservation)}>
+                  Confirmar
+                </button>
+              </div>
             </li>
           ))}
         </ul>
-      </main>
-      <aside>
-        <div className="aside-content">
-          <h3>Tus Reservas Seleccionadas:</h3>
-          <ul>
-            {selectedReservations.map((reservation) => (
-              <li key={reservation.id}>
-                {reservation.customer} - {reservation.date}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </aside>
-      <footer className="footer">
-        <div className="footer-content">
-          <p>&copy; 2023 WashUp. Todos los derechos reservados.</p>
-        </div>
-      </footer>
-    </div>
+      </div>
+      <div className="selected-reservations-box">
+        <h3>Tus Reservas Seleccionadas:</h3>
+        <ul>
+          {selectedReservations.map((reservation) => (
+            <li key={reservation.id}>
+              <div className="reservation-details">
+                <div className="reservation-text">
+                  {reservation.customer} - {reservation.date}
+                </div>
+                <button className="cancel-button" onClick={() => handleReservationCancel(reservation)}>
+                  Cancelar
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </main>
+    <footer className="employee-interface-footer">
+      <p>&copy; 2023 WashUp. Todos los derechos reservados.</p>
+    </footer>
+  </div>
   );
 };
 

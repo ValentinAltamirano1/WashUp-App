@@ -623,7 +623,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-  background-color: #e2f5fc;;
+  background-color: #e2f5fc;
 }
 
 .newsletter-bx {
@@ -716,3 +716,88 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   color: white; /* Color del texto en el contenedor */
 
 }
+
+/************ Employee Interface **********/
+.employee-interface {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh; /* Asegura que la página ocupe al menos el alto de la ventana. */
+}
+
+.employee-interface-header {
+  background-color: #2596be;
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.employee-name {
+  margin-right: auto;
+  color: white;
+}
+
+.employee-logout-button {
+  color: white !important;
+}
+
+.employee-interface-main {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column; /* Ajuste para tener las cajas en columna. */
+  align-items: center;
+}
+
+.reservations-box,
+.selected-reservations-box {
+  background-color: #2596be;
+  border: 1px solid #a7cade;
+  padding: 10px;
+  width: 90%; /* Ajustado el ancho para que ocupen más espacio en móvil. */
+  margin: 10px;
+}
+
+.reservations-box {
+  text-align: center;
+}
+
+.selected-reservations-box {
+  text-align: center;
+}
+
+.employee-interface-footer {
+  background-color: #2596be;
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  margin-top: auto; /* Mueve el footer al final de la página. */
+}
+
+.reservation-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reservation-text {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.confirm-button,
+.cancel-button {
+  padding: 5px 10px; /* Ajusta el espaciado del botón. */
+  background-color: #2596be;
+  color: white;
+  border: 1px solid white;
+  border-radius: 7px;
+  cursor: pointer;
+  width: 300px;
+}
+

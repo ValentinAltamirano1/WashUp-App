@@ -8,7 +8,9 @@ import { AuthProvider } from './Components/AuthContext';
 import Dashboard from './Components/AdminComponents/Dashboard'; 
 import Empleados from './Components/AdminComponents/Empleados';
 import ServiciosAdmin from './Components/AdminComponents/Servicios';
+import ResetPasswordMail from './Components/ResetPasswordMail';
 import ResetPassword from './Components/ResetPassword';
+import GoogleCallback from './Components/GoogleCallback';
 
 function App() {
   return (
@@ -22,7 +24,9 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/employee" element={<Empleados />} />  
           <Route path="/services/admin" element={<ServiciosAdmin />} />
-          <Route path="/resetpassword" element={<ResetPassword />} />
+          <Route path="/reset-password-mail" element={<ResetPasswordMail />} />
+          <Route path="/reset-password/:uniqueID" element={<ResetPassword />} />
+          <Route path="/auth/google/callback" element={<GoogleCallback />} />
         </Routes>
       </Router>
     </AuthProvider>

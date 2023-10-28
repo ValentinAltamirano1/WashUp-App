@@ -11,14 +11,14 @@ export const MainListItems = () => {
   const navigate = useNavigate();
  
   return (
-    <React.Fragment>
+    <React.Fragment >
       <ListItemButton onClick={() => navigate("/dashboard")}>
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
         <ListItemText primary="Panel" />
       </ListItemButton>
-      <ListItemButton onClick={() => navigate("/employee")}  >
+      <ListItemButton onClick={() => navigate("/employee")}   >
         <ListItemIcon>
           <PeopleIcon />
         </ListItemIcon>
@@ -33,3 +33,4 @@ export const MainListItems = () => {
     </React.Fragment>
   );
 };
+

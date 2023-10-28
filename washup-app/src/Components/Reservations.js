@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import './Products.css';
+import './Reservations.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const Products = () => {
+const Reservations = () => {
   const [servicio, setServicio] = useState('');
   const [fecha, setFecha] = useState(null); // Estado para almacenar la fecha seleccionada
   const [horario, setHorario] = useState(''); // Estado para almacenar el horario seleccionado
@@ -30,16 +30,46 @@ const Products = () => {
     setUbicacion(e.target.value);
   };
 
+
+  // Definir la URL del servidor de backend (cámbiala según tu configuración)
+  const backendURL = 'http://localhost:4000/reservations';
+
   const enviarReserva = () => {
-    console.log('Reserva enviada:', servicio, fecha, horario, ubicacion);
+    const reservaData = {
+      servicio,
+      fecha,
+      horario,
+      ubicacion,
+    };
+  
+    fetch(backendURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(reservaData),
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log('Reserva exitosa');
+          // Realizar cualquier acción adicional en caso de éxito
+        } else {
+          console.error('Error al realizar la reserva');
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  
     setServicio('');
     setFecha(null);
     setHorario('');
     setUbicacion('');
   };
+  
 
   return (
-    <div className="products-container">
+    <div className="products-container" style={{ marginTop: '40px' }}>
       <h2>Reservar un Servicio</h2>
       <form>
         <div className="form-group">
@@ -87,7 +117,7 @@ const Products = () => {
         )}
         {ubicacion && (
           <button className="btn-reservar" type="button" onClick={enviarReserva}>
-            Reservar
+            Pagar
           </button>
         )}
       </form>
@@ -95,4 +125,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default Reservations;

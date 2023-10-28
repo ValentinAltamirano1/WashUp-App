@@ -1,0 +1,140 @@
+/* Empleado Registration Form CSS */
+
+.employee-container {
+  position: relative;
+  max-width: 700px;
+  width: 100%;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  margin: 0 auto; /* Esto centra horizontalmente el contenedor */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -100px;
+  border: 2px solid #2596be; /* Establece un borde de 2px de ancho con color #2596be */
+  border-color: #2596be ;
+}
+
+.employee-container .employee-form {
+  margin-top: 10px;
+}
+
+.employee-form .employee-input-box {
+  width: 100%;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.employee-input-box label {
+  color: #333;
+}
+
+.employee-form :where(.employee-input-box input, .employee-select-box) {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #707070;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0 15px;
+}
+
+.employee-input-box input:focus {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.employee-form .employee-column {
+  display: flex;
+  column-gap: 15px;
+}
+
+.employee-form .employee-gender-box {
+  margin-top: 20px;
+}
+
+.employee-gender-box h3 {
+  color: #333;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.employee-form :where(.employee-gender-option, .employee-gender) {
+  display: flex;
+  align-items: center;
+  column-gap: 50px;
+  flex-wrap: wrap;
+}
+
+.employee-form .employee-gender {
+  column-gap: 5px;
+}
+
+.employee-gender input {
+  accent-color: #2596be;
+}
+
+.employee-form :where(.employee-gender input, .employee-gender label) {
+  cursor: pointer;
+}
+
+.employee-gender label {
+  color: #707070;
+}
+
+.employee-address :where(input, .employee-select-box) {
+  margin-top: 15px;
+}
+
+.employee-select-box select {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  color: #707070;
+  font-size: 1rem;
+}
+
+.employee-form button {
+  height: 55px;
+  width: 100%;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 30px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #2596be;
+}
+
+.employee-form button:hover {
+  background: #134d63;
+}
+
+.employee-error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+.employee-success-message {
+    color: green;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+/* Responsive */
+@media screen and (max-width: 500px) {
+  .employee-form .employee-column {
+    flex-wrap: wrap;
+  }
+
+  .employee-form :where(.employee-gender-option, .employee-gender) {
+    row-gap: 15px;
+  }
+}

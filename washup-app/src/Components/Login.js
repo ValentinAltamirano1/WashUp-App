@@ -202,7 +202,7 @@ const RegisterForm = ({ username, email, password, setUsername, setEmail, setPas
       {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Mostrar mensaje de error */}
       <button  type="button" onClick={handleRegisterForm}>Register</button>
       <div className="social-container">
-        <a href="#" className="social">
+        <a href="https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email&include_granted_scopes=true&response_type=token&redirect_uri=http://localhost:3000/auth/google/callback&client_id=5698593103-c586gjtp45p32p4vpdne33a9eajoupc4.apps.googleusercontent.com" className="social">
           <i className="lni lni-google"></i>
           <span className="span-link">Register with your account</span>
         </a>
@@ -224,13 +224,13 @@ const LoginForm = ({ email, password, setEmail, setPassword, handleLoginForm, er
           <label htmlFor="remember-me">Remember me</label>
         </div>
         <div className="pass-link">
-          <Link to="/resetpassword">Forgot password?</Link>
+          <Link to="/reset-password-mail">Forgot password?</Link>
         </div>
       </div>
-      {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Mostrar mensaje de error */}
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
       <button  type="button" onClick={handleLoginForm}>Login</button>
       <div className="social-container">
-        <a href="#" className="social">
+        <a href="https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email&include_granted_scopes=true&response_type=token&redirect_uri=http://localhost:3000/auth/google/callback&client_id=5698593103-c586gjtp45p32p4vpdne33a9eajoupc4.apps.googleusercontent.com" className="social">
           <i className="lni lni-google"></i>
           <span>Login with your account</span>
         </a>

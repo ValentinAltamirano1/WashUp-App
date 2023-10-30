@@ -127,7 +127,6 @@ const Login = () => {
         } else if (endpoint === 'http://localhost:4000/employeelogin') {
           const token = data.token;
           login(token);
-          
           const employeeFullname = data.fullname;
           localStorage.setItem('employeeFullname', employeeFullname);
           navigate('/employeeinterface');

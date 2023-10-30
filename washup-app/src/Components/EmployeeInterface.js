@@ -3,10 +3,11 @@ import { useAuth } from './AuthContext';
 import { IconButton } from '@mui/material';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
-const EmployeeDashboard = () => {
+const EmployeeInterface = () => {
   const [reservations, setReservations] = useState([]);
   const [selectedReservations, setSelectedReservations] = useState([]);
   const {logout} = useAuth();
+  
 
   // Simulación de reservas (esto debería obtenerse desde el back-end)
   const reservationsData = [
@@ -33,14 +34,15 @@ const EmployeeDashboard = () => {
       prevSelected.filter((r) => r.id !== reservation.id)
     );
   };
+  console.log(logout.EmployeeInterface);
 
   return (
     <div className="employee-interface">
     <header className="employee-interface-header">
       <h2 className="employee-name">Hola, {employeeFullname}</h2>
-      <IconButton size="small" onClick={logout} className="employee-logout-button">
-        <ExitToAppIcon />
-      </IconButton>
+      <button onClick={logout} className="employee-logout-button">
+          Cerrar Sesión
+      </button>
     </header>
     <main className="employee-interface-main">
       <div className="reservations-box">
@@ -85,4 +87,4 @@ const EmployeeDashboard = () => {
   );
 };
 
-export default EmployeeDashboard;
+export default EmployeeInterface;

@@ -19,7 +19,7 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <Routes>
+        <Routes>2
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/services" element={<Services />} />

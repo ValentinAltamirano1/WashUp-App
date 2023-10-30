@@ -18,8 +18,12 @@ const GoogleCallback = () => {
 
                 if (response.ok) {
                     const data = await response.json();
+                    console.log("data: ",data)
                     const email = data.email;
-                    handleGoogleLogin(googleToken, email);
+                    const username = data.name;
+                    console.log("name: ",username)
+                    console.log("email: ",email)
+                    handleGoogleLogin(googleToken, email, username);
                 } else {
                     console.error('Failed to fetch user info from Google');
                 }
@@ -31,14 +35,13 @@ const GoogleCallback = () => {
         // Verificar si hay un token de Google en la URL
         const hashParams = new URLSearchParams(window.location.hash.substring(1)); // Elimina el carácter '#'
         const googleToken = hashParams.get('access_token');
-        console.log("googleToken: ", googleToken);
     
         if (googleToken) {
             fetchGoogleUserInfo(googleToken);
         }
     }, []);
     
-      const handleGoogleLogin = async (googleToken, email) => {
+      const handleGoogleLogin = async (googleToken, email, username) => {
         console.log("token: ",googleToken)
         try {
           const response = await fetch('http://localhost:4000/social-login', {
@@ -49,9 +52,10 @@ const GoogleCallback = () => {
             body: JSON.stringify({
                 token: googleToken,
                 email: email,
+                username: username,
             }),
           });
-    
+          console.log("response: ",response)
           if (response.ok) {
             const data = await response.json();
             const token = data.token;

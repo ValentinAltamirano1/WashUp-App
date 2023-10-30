@@ -4,7 +4,6 @@ import { IconButton } from '@mui/material';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 const EmployeeDashboard = () => {
-  const [employeeName, setEmployeeName] = useState('Eduardo');
   const [reservations, setReservations] = useState([]);
   const [selectedReservations, setSelectedReservations] = useState([]);
   const {logout} = useAuth();
@@ -15,6 +14,8 @@ const EmployeeDashboard = () => {
     { id: 2, customer: 'Cliente 2', date: '2023-11-05' },
     { id: 3, customer: 'Cliente 3', date: '2023-11-10' },
   ];
+
+  const employeeFullname = localStorage.getItem('employeeFullname');
 
   useEffect(() => {
     // Simulación de carga de reservas desde el back-end
@@ -36,7 +37,7 @@ const EmployeeDashboard = () => {
   return (
     <div className="employee-interface">
     <header className="employee-interface-header">
-      <h2 className="employee-name">Hola, {employeeName}</h2>
+      <h2 className="employee-name">Hola, {employeeFullname}</h2>
       <IconButton size="small" onClick={logout} className="employee-logout-button">
         <ExitToAppIcon />
       </IconButton>

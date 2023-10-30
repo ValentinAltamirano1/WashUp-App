@@ -125,9 +125,12 @@ const Login = () => {
           login(token);
           navigate('/');
         } else if (endpoint === 'http://localhost:4000/employeelogin') {
-          //const token = data.token;
-          //login(token);
-          navigate('/dashboard');
+          const token = data.token;
+          login(token);
+          
+          const employeeFullname = data.fullname;
+          localStorage.setItem('employeeFullname', employeeFullname);
+          navigate('/employeeinterface');
         }
       } else {
         // Manejar la respuesta de error, por ejemplo, mostrar un mensaje de error.

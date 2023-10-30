@@ -54,6 +54,7 @@ const Reservations = () => {
       })
       .then((data) => {
         setHorariosDisponibles(data.horarios);
+        console.log('Horarios disponibles:', data.horarios);
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -161,5 +162,4 @@ const Reservations = () => {
 };
 
 export default Reservations;
-
 

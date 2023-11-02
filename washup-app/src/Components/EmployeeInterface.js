@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from './AuthContext';
-import { IconButton } from '@mui/material';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-
-const EmployeeDashboard = () => {
-  const [employeeName, setEmployeeName] = useState('Eduardo');
+import { useNavigate} from 'react-router-dom';
+const EmployeeInterface = () => {
   const [reservations, setReservations] = useState([]);
   const [selectedReservations, setSelectedReservations] = useState([]);
-  const {logout} = useAuth();
+  const {token,logout} = useAuth();
+  
 
   // Simulación de reservas (esto debería obtenerse desde el back-end)
   const reservationsData = [
@@ -15,6 +13,10 @@ const EmployeeDashboard = () => {
     { id: 2, customer: 'Cliente 2', date: '2023-11-05' },
     { id: 3, customer: 'Cliente 3', date: '2023-11-10' },
   ];
+
+  const navigate = useNavigate();
+
+  const employeeFullname = localStorage.getItem('employeeFullname');
 
   useEffect(() => {
     // Simulación de carga de reservas desde el back-end
@@ -32,14 +34,23 @@ const EmployeeDashboard = () => {
       prevSelected.filter((r) => r.id !== reservation.id)
     );
   };
+ 
 
+  useEffect(() => {
+    if (token === null) {
+      // El token se ha actualizado a null, por lo que redirige a la página de inicio de sesión
+      navigate('/login');
+    }
+  }, [token]);
+  
+  
   return (
     <div className="employee-interface">
     <header className="employee-interface-header">
-      <h2 className="employee-name">Hola, {employeeName}</h2>
-      <IconButton size="small" onClick={logout} className="employee-logout-button">
-        <ExitToAppIcon />
-      </IconButton>
+      <h2 className="employee-name">Hola, {employeeFullname}</h2>
+      <button onClick={logout} className="employee-logout-button">
+          Cerrar Sesión
+      </button>
     </header>
     <main className="employee-interface-main">
       <div className="reservations-box">
@@ -84,4 +95,4 @@ const EmployeeDashboard = () => {
   );
 };
 
-export default EmployeeDashboard;
+export default EmployeeInterface;

@@ -6,6 +6,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PeopleIcon from '@mui/icons-material/People';
 import { useNavigate } from 'react-router-dom';
+import DeleteIcon from '@mui/icons-material/Delete';
  
 export const MainListItems = () => {
   const navigate = useNavigate();
@@ -29,6 +30,12 @@ export const MainListItems = () => {
           <ShoppingCartIcon />
         </ListItemIcon>
         <ListItemText primary="Servicios" />
+      </ListItemButton>
+      <ListItemButton onClick={() => navigate("/admindelete")}   >
+        <ListItemIcon>
+          <DeleteIcon />
+        </ListItemIcon>
+        <ListItemText primary="Delete" />
       </ListItemButton>
     </React.Fragment>
   );

@@ -246,12 +246,17 @@ function ServiceRegistrationForm () {
             </List>
             </Drawer>
         </Box>
+        <div className='delete-container'>
         <section className="employee-container">
           <h1 style={{ color: '#2596be', fontWeight: 'bold', textAlign: 'center', textShadow: '0 0 10px rgba(16, 46, 74, 0.5)' }}>Registro de Servicios</h1>
           <form action="#" className="employee-form">
           {showMessage && (
             <p className="employee-success-message"> Servicio Guardado exitosamente.</p>
             )}
+            <div className="employee-input-box">
+              <label>ID de referencia del servicio</label>
+              <input type="text" name="serviceReferenceID" placeholder="Ingresar ID de referencia del servicio" required value={formData.serviceReferenceID} onChange={handleInputChange} />
+            </div>
             <div className="employee-column">
                 <div className="employee-input-box">
                 <label>Nombre del servicio</label>
@@ -286,6 +291,7 @@ function ServiceRegistrationForm () {
             <button onClick={handleSubmit}>Enviar</button>
           </form>
         </section>
+        </div>
       </div>
     );
   }

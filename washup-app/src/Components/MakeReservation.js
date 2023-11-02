@@ -8,12 +8,14 @@ const Reservations = () => {
   const [fecha, setFecha] = useState(null);
   const [horarioSeleccionado, setHorarioSeleccionado] = useState('');
   const [ubicacion, setUbicacion] = useState('');
+  const [autocomplete, setAutocomplete] = useState(null);
   const [fechasNoDisponibles, setFechasNoDisponibles] = useState([]);
   const [horariosDisponibles, setHorariosDisponibles] = useState([]);
 
   const servicios = ['Lavado Exterior', 'Lavado Interior', 'Lavado Completo', 'Lavado de Motor', 'Lavado de Tapicería', 'Encerado', 'Limpieza de Vidrios', 'Desinfección', 'Lavado Express'];
   const horarios = ['9:00 AM', '10:00 AM', '11:00 AM', '2:00 PM', '3:00 PM'];
 
+  
   const handleServicioChange = (e) => {
     const nuevoServicio = e.target.value;
     setServicio(nuevoServicio);
@@ -39,11 +41,27 @@ const Reservations = () => {
       });
   };
 
+  useEffect(() => {
+    // Inicializar el autocompletado de Places cuando el componente se monta
+    const input = document.getElementById('ubicacion-input');
+    if (window.google && input) {
+      const autocompleteService = new window.google.maps.places.AutocompleteService();
+      const placesAutocomplete = new window.google.maps.places.Autocomplete(input);
+      setAutocomplete(placesAutocomplete);
+
+      // Escuchar el evento de selección de un lugar
+      placesAutocomplete.addListener('place_changed', () => {
+        const place = placesAutocomplete.getPlace();
+        if (place) {
+          setUbicacion(place.formatted_address);
+        }
+      });
+    }
+  }, []);
+
   const cargarHorariosDisponibles = (fechaSeleccionada) => {
     // Realiza una solicitud al servidor para obtener los horarios disponibles
   const horariosDisponiblesURL = `http://localhost:4000/horariosdisponibles/${servicio}/${fechaSeleccionada}`;
-
-
 
     fetch(horariosDisponiblesURL)
       .then((response) => {
@@ -150,7 +168,13 @@ const Reservations = () => {
         {horarioSeleccionado && (
           <div className="form-group">
             <label>Especifique una ubicación:</label>
-            <input className="input" type="text" value={ubicacion} onChange={(e) => setUbicacion(e.target.value)} />
+              <input
+              id="ubicacion-input"
+              className="input"
+              type="text"
+              value={ubicacion}
+              onChange={(e) => setUbicacion(e.target.value)}
+            />
           </div>
         )}
         {ubicacion && (

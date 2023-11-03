@@ -42,6 +42,7 @@ const Reservations = () => {
   const cargarHorariosDisponibles = (fechaSeleccionada) => {
     // Realiza una solicitud al servidor para obtener los horarios disponibles
   const horariosDisponiblesURL = `http://localhost:4000/horariosdisponibles/${servicio}/${fechaSeleccionada}`;
+  console.log('URL de horarios disponibles:', horariosDisponiblesURL);
 
 
 

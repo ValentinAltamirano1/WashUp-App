@@ -35,7 +35,7 @@ export const NavBar = () => {
     <div className='nav-container'>
       <Navbar expand="lg" className={scrolled ? "scrolled" : ""}>
         <Container>
-          <Navbar.Brand href="#home">
+          <Navbar.Brand href="#home" >
             <img src={logo} alt="logo" style={{ width: '100px' }} />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav">
@@ -49,13 +49,16 @@ export const NavBar = () => {
               <Nav.Link as={Link} to="/about-us" className={`nav-link ${activeLink === 'about-us' ? 'active about-us' : ''}`} onClick={() => onUpdateActiveLink('about-us')}style={{ fontWeight: 400, color: '#2596be', letterSpacing: '0.8px', padding: '0 25px', fontSize: '18px', opacity: 0.75 }}>Sobre nosotros</Nav.Link>
               <Nav.Link as={Link} to="/services" className={`nav-link ${activeLink === 'services' ? 'active services' : ''}`} onClick={() => onUpdateActiveLink('services')}style={{ fontWeight: 400, color: '#2596be', letterSpacing: '0.8px', padding: '0 25px', fontSize: '18px', opacity: 0.75 }}>Servicios</Nav.Link>
               <Nav.Link href="/#locations" className={activeLink === 'locations' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('locations')}>Ubicacion</Nav.Link>
+              {isAuthenticated && (
+                <Nav.Link as={Link} to="/misReservas" className={`nav-link ${activeLink === 'misReservas' ? 'active misReservas' : ''}`} onClick={() => onUpdateActiveLink('misReservas')}style={{ fontWeight: 400, color: '#2596be', letterSpacing: '0.8px', padding: '0 25px', fontSize: '18px', opacity: 0.75 }}>Reservas</Nav.Link>
+              )}
             </Nav>
             <span className="navbar-text">
               <div className="social-icon">
                 <a href="#"><img src={navIcon1} alt="" /></a>
               </div>
               {isAuthenticated ? (
-                <div>
+                <div style={{ display: 'flex' }}>
                   <Button variant="contained" className="btn btn-lg vvd-btn connect-button" onClick={() => navigate('/makereservation')}>Reservar</Button>
                   <IconButton size="small" onClick={logout} className="logout-button">
                     <ExitToAppIcon />

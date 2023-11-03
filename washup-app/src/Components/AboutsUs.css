@@ -1,0 +1,57 @@
+/* Estilo común para todas las tarjetas de valores */
+.values-container {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 150px;
+  }
+  
+  .value-card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    perspective: 500px;
+  }
+  
+  .value-card .card-inner {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.99s;
+  }
+  
+  /* Giro al pasar el cursor por encima de la tarjeta */
+  .value-card:hover .card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  .value-card .card-front,
+  .value-card .card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+  }
+  
+  /* Estilo común para el fondo frontal de todas las tarjetas */
+  .value-card .card-front {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotateY(0deg);
+    border: 40px solid #2596be; /* Agrega un borde azul */
+    background-color: #2596be; /* Agrega un fondo blanco */
+    border-radius: 10px; /* Añade esquinas redondeadas */
+  }
+  
+  /* Estilo común para el fondo trasero de todas las tarjetas */
+  .value-card .card-back {
+    background-color: #2596be; /* Color de fondo común para la parte trasera de todas las tarjetas */
+    color: #2596be; /* Color del texto de la parte trasera de todas las tarjetas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotateY(180deg);
+
+  }
+  

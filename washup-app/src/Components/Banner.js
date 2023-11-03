@@ -17,7 +17,7 @@ export const Banner = () => {
   const [text, setText] = useState('');
   const [delta, setDelta] = useState(300 - Math.random() * 100);
   const [index, setIndex] = useState(1);
-  const toRotate = [ "fast", "trustworthy", "economic" ];
+  const toRotate = [ "rapido", "seguro", "economico" ];
   const period = 2000;
   const { isAuthenticated } = useAuth();
 
@@ -64,8 +64,8 @@ export const Banner = () => {
               {({ isVisible }) =>
               
               <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                <h1>{`Welcome to WashUp, `} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "fast", "trustworthy", "economic" ]'><span className="wrap">{text}</span></span></h1>
-                  <p>Discover the shine your vehicle deserves at our top-notch car wash! At WashUp, we provide professional car washing service that rejuvenates your car's appearance by removing dirt and impurities. Our expert team and quality products ensure a flawless outcome. Trust us to leave your vehicle sparkling and road-ready.</p>
+                <h1>{`Bienvenido WashUp, `} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "rapido", "seguro", "economico" ]'><span className="wrap">{text}</span></span></h1>
+                  <p>"¡Descubre el brillo que tu vehículo merece en nuestro lavado de autos de primera categoría! En WashUp, ofrecemos un servicio profesional de lavado de autos que rejuvenece la apariencia de tu vehículo al eliminar la suciedad y las impurezas. Nuestro equipo de expertos y productos de alta calidad garantizan un resultado impecable. Confía en nosotros para dejar tu vehículo reluciente y listo para la carretera."</p>
                   {!isAuthenticated && (
                     <Button onClick={() => navigate('/login')}>
                       Conectar <ArrowRightCircle size={25} />

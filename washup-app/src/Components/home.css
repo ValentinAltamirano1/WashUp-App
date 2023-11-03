@@ -293,6 +293,22 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   box-shadow: 0 0 5px rgba(37, 150, 190, 0.5); /* Agrega una sombra al pasar el cursor */
 }
 
+.navbar-link {
+  /* Estilos regulares para los enlaces */
+  color: #2596be;
+  letter-spacing: 0.8px;
+  padding: 0 25px;
+  font-size: 18px;
+  opacity: 0.75;
+  transition: color 0.3s; /* Agregar una transición suave para el cambio de color */
+}
+
+/* Estilos para los enlaces cuando el cursor está sobre ellos */
+.navbar-link:hover {
+  color: #ff7f50 !important; /* Cambia el color a uno más oscuro cuando se pasa el cursor */
+}
+
+
 /************ Banner Css ************/
 .banner {
   margin-top: 0;
@@ -374,10 +390,10 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 }
 
 /************ Products Css ************/
-.skill {
+.skills {
   padding: 0 0 50px 0;
   position: relative;
-  background-color: #f0faff;
+  background-color: #f0faff !important;
 }
 .skill-bx {
   background: #6ca1b4;
@@ -386,16 +402,18 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   padding: 60px 50px;
   margin-top: 20px;
 }
-.skill h2 {
+.skill-bx h2 {
     font-size: 50px;
     font-weight: 700;
+    color: #ffffff;
 }
-.skill p {
+.skill-bx p {
     color: #ffffff;
     font-size: 24px;
     letter-spacing: 0.8px;
     line-height: 1.5em;
     margin: 14px 0 75px 0;
+    
 }
 .skill-slider {
   width: 90%;

@@ -3,6 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
 import ServiceCard from "./ServiceCard";
+import {NavBar} from "./NavBar";
 
 import service1Image from "../assets/img/lavadero1.jpg";
 import service2Image from "../assets/img/lavadero2.jpg";
@@ -70,34 +71,37 @@ const Services = () => {
   };
 
   return (
-    <section className="services" id="services">
-      <Container>
-        <Row>
-          <Col xs={12}>
-            <TrackVisibility>
-              {({ isVisible }) => (
-                <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                  <h2 style={titleStyle}>Nuestros Servicios</h2>
-                  <p style={descriptionStyle}>Explora nuestra variedad de servicios personalizados.</p>
-                  <Row>
-                    {servicesData.map((service, index) => (
-                      <Col key={index} xs={12} sm={6} md={4}>
-                        <div style={serviceCardStyle}></div>
-                        <ServiceCard
-                          title={service.title}
-                          description={service.description}
-                          image={service.image} // Ruta de la imagen correspondiente
-                        />
-                      </Col>
-                    ))}
-                  </Row>
-                </div>
-              )}
-            </TrackVisibility>
-          </Col>
-        </Row>
-      </Container>
-    </section>
+    <div>
+      <NavBar/> {/* Abre NavBar antes de la sección Services */}
+      <section className="services" id="services">
+        <Container>
+          <Row>
+            <Col xs={12}>
+              <TrackVisibility>
+                {({ isVisible }) => (
+                  <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
+                    <h2 style={titleStyle}>Nuestros Servicios</h2>
+                    <p style={descriptionStyle}>Explora nuestra variedad de servicios personalizados.</p>
+                    <Row>
+                      {servicesData.map((service, index) => (
+                        <Col key={index} xs={12} sm={6} md={4}>
+                          <div style={serviceCardStyle}></div>
+                          <ServiceCard
+                            title={service.title}
+                            description={service.description}
+                            image={service.image} // Ruta de la imagen correspondiente
+                          />
+                        </Col>
+                      ))}
+                    </Row>
+                  </div>
+                )}
+              </TrackVisibility>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+    </div>
   );
 };
 

@@ -14,6 +14,8 @@ const Reservations = () => {
   const [fechasNoDisponibles, setFechasNoDisponibles] = useState([]);
   const [horariosDisponibles, setHorariosDisponibles] = useState([]);
 
+  const userEmail = localStorage.getItem('userEmail');
+
   const servicios = ['Lavado Exterior', 'Lavado Interior', 'Lavado Completo', 'Lavado de Motor', 'Lavado de Tapicería', 'Encerado', 'Limpieza de Vidrios', 'Desinfección', 'Lavado Express'];
   const horarios = ['9:00 AM', '10:00 AM', '11:00 AM', '2:00 PM', '3:00 PM'];
 
@@ -437,8 +439,9 @@ const Reservations = () => {
       fecha: fecha.toISOString().slice(0, 10),
       horario: horarioSeleccionado,
       ubicacion: ubicacion,
-
+      user_email: userEmail,
     };
+
     console.log('Reserva:', reservaData);
     fetch(backendURL, {
       method: 'POST',

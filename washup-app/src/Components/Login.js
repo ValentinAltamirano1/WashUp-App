@@ -123,6 +123,9 @@ const Login = () => {
         if (endpoint === 'http://localhost:4000/login') {
           const token = data.token;
           login(token);
+          const userEmail = data.email;
+          localStorage.setItem('userEmail', userEmail);
+          console.log(userEmail);
           navigate('/');
         } else if (endpoint === 'http://localhost:4000/employeelogin') {
           const token = data.token;

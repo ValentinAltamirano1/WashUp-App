@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "animate.css";
-import { useEffect } from "react";
 
 let map;
 
@@ -333,52 +332,111 @@ export const Locations = () => {
     }
   }, []);
 
-  const textContainerStyle = {
-    backgroundColor: "#red",
-    padding: "20px",
-    borderRadius: "5px",
-    width: '600px',
-  };
-
-  const textStyle = {
-    color: "#fff",
-  };
-
-  const iframeStyle = {
-    width: '600px',
-    height: '450px', 
-    style: 'border:0;',
-    allowfullscreen: '',
-    loading: 'lazy',
-    referrerpolicy: 'no-referrer-when-downgrade',
-    borderRadius: "10px",
-    justifyContent: 'center',
-  };
+  // Define nombres y precios para cada zona
+  const zones = [
+    {
+      name: "Pocitos",
+      color: "#FF0000",
+      price: "$100",
+    },
+    {
+      name: "Punta Carretas",
+      color: "#8A2BE2",
+      price: "$120",
+    },
+    {
+      name: "Parque Batlle",
+      color: "#0000FF",
+      price: "$90",
+    },
+    {
+      name: "Malvín",
+      color: "#FF0000",
+      price: "$80",
+    },
+    {
+      name: "Punta Gorda",
+      color: "#8A2BE2",
+      price: "$110",
+    },
+    {
+      name: "Carrasco",
+      color: "#228B22",
+      price: "$130",
+    },
+  ];
 
   const containerStyle = {
-      textAlign: 'center',
-      margin: '20px 0'
+    textAlign: "center",
+    margin: "20px 0",
   };
 
   const rowStyle = {
-    paddingTop: '20px',
-    paddingBottom: '20px'
+    paddingTop: "20px",
+    paddingBottom: "20px",
+    justifyContent: "center",
   };
 
-  return ( 
+  const mapContainerStyle = {
+    backgroundColor: "#6ca1b4",
+    padding: "20px",
+    borderRadius: "5px",
+  };
+
+  const mapStyle = {
+    width: "600px",
+    height: "450px",
+    border: "0",
+    allowfullscreen: "",
+    loading: "lazy",
+    referrerpolicy: "no-referrer-when-downgrade",
+    borderRadius: "10px",
+  };
+
+  const textContainerStyle = {
+    backgroundColor: "#6ca1b4", // Mismo color que el mapa
+    padding: "20px",
+    borderRadius: "5px",
+    width: "300px", // Ajusta el ancho del textContainer
+  };
+
+  const mapAndTextContainer = {
+    display: "flex",
+    justifyContent: "center", // Centra los elementos horizontalmente
+  };
+
+  return (
     <section className="locations" id="locations">
       <Container style={containerStyle}>
         <Row style={rowStyle}>
-          <Col lg={{span: 4, offset: 4}} md={{span: 4, offset: 4}}>
-            <div className="about-box">
-              <div className="about-image">
-                <div className="map" id="map" style={iframeStyle}>
-                  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-upHQAJfOoePqdwfQfa_8W0Xvpp1hwvM&callback=initMap"></script>
+          <Col lg={8} md={8}>
+            <div className="about-box" style={mapAndTextContainer}>
+              <div className="about-image" style={{ ...mapContainerStyle }}>
+                <div className="map" id="map" style={mapStyle}>
+                  <script
+                    async
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-upHQAJfOoePqdwfQfa_8W0Xvpp1hwvM&callback=initMap"
+                  ></script>
                 </div>
               </div>
-              <div className="about-text" style={textContainerStyle}>
-                <h2 style={textStyle}>Ubicación</h2>
-                <p style={textStyle}>Description for Location 1</p>
+              <div className="about-text" style={{ ...textContainerStyle }}>
+                <h2 style={{ color: "#fff" }}>Precios</h2>
+                <div>
+                  {zones.map((zone, index) => (
+                    <div key={index} style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
+                      <div
+                        style={{
+                          width: "20px",
+                          height: "20px",
+                          backgroundColor: zone.color,
+                          marginRight: "10px",
+                          flex: "0 0 auto", // Establece el ancho automático
+                        }}
+                      ></div>
+                      <div style={{ color: "#fff" }}>{zone.name} - {zone.price}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </Col>
@@ -387,3 +445,4 @@ export const Locations = () => {
     </section>
   );
 };
+

@@ -50,7 +50,7 @@ export const NavBar = () => {
               <Nav.Link as={Link} to="/services" className={`nav-link ${activeLink === 'services' ? 'active services' : ''}`} onClick={() => onUpdateActiveLink('services')}style={{ fontWeight: 400, color: '#2596be', letterSpacing: '0.8px', padding: '0 25px', fontSize: '18px', opacity: 0.75 }}>Servicios</Nav.Link>
               <Nav.Link href="/#locations" className={activeLink === 'locations' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('locations')}>Ubicacion</Nav.Link>
               {isAuthenticated && (
-                <Nav.Link as={Link} to="/misReservas" className={`nav-link ${activeLink === 'misReservas' ? 'active misReservas' : ''}`} onClick={() => onUpdateActiveLink('misReservas')}style={{ fontWeight: 400, color: '#2596be', letterSpacing: '0.8px', padding: '0 25px', fontSize: '18px', opacity: 0.75 }}>Reservas</Nav.Link>
+                <Nav.Link as={Link} to="/my-reservations" className={`nav-link ${activeLink === 'my-reservations' ? 'active my-reservations' : ''}`} onClick={() => onUpdateActiveLink('my-reservations')}style={{ fontWeight: 400, color: '#2596be', letterSpacing: '0.8px', padding: '0 25px', fontSize: '18px', opacity: 0.75 }}>Reservas</Nav.Link>
               )}
             </Nav>
             <span className="navbar-text">

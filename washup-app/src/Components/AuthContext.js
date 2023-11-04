@@ -3,10 +3,10 @@ import { createContext, useContext, useState } from 'react';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  // Recuperar el token de autenticación almacenado en localStorage
+  
   const initialToken = localStorage.getItem('authToken');
   const [token, setToken] = useState(initialToken);
-  const isAuthenticated = !!token; // Verificar si el token existe
+  const isAuthenticated = !!token; 
 
   const login = (newToken) => {
     // Al iniciar sesión, actualiza el token y guárdalo en localStorage

@@ -35,7 +35,7 @@ export const NavBar = () => {
     <div className='nav-container'>
       <Navbar expand="lg" className={scrolled ? "scrolled" : ""}>
         <Container>
-          <Navbar.Brand href="#home" >
+          <Navbar.Brand href="#home" className="custom-logo" >
             <img src={logo} alt="logo" style={{ width: '100px' }} />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav">
@@ -46,11 +46,11 @@ export const NavBar = () => {
               <Nav.Link href="/" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('home')}>Inicio</Nav.Link>
               <Nav.Link href="/#skills" className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('skills')}>Productos</Nav.Link>
               <Nav.Link href="/#projects" className={activeLink === 'project' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('project')}>Proyectos</Nav.Link>
-              <Nav.Link as={Link} to="/about-us" className={`nav-link ${activeLink === 'about-us' ? 'active about-us' : ''}`} onClick={() => onUpdateActiveLink('about-us')}style={{ fontWeight: 400, color: '#2596be', letterSpacing: '0.8px', padding: '0 25px', fontSize: '18px', opacity: 0.75 }}>Sobre nosotros</Nav.Link>
-              <Nav.Link as={Link} to="/services" className={`nav-link ${activeLink === 'services' ? 'active services' : ''}`} onClick={() => onUpdateActiveLink('services')}style={{ fontWeight: 400, color: '#2596be', letterSpacing: '0.8px', padding: '0 25px', fontSize: '18px', opacity: 0.75 }}>Servicios</Nav.Link>
+              <Nav.Link as={Link} to="/about-us" className={`nav-link ${activeLink === 'about-us' ? 'active about-us' : ''}`} onClick={() => onUpdateActiveLink('about-us')}style={{ fontWeight: 400, color: '#2596be', letterSpacing: '0.8px', padding: '0 25px', fontSize: '18px', opacity: 0.75, marginLeft:'-10px' }}>Sobre nosotros</Nav.Link>
+              <Nav.Link as={Link} to="/services" className={`nav-link ${activeLink === 'services' ? 'active services' : ''}`} onClick={() => onUpdateActiveLink('services')}style={{ fontWeight: 400, color: '#2596be', letterSpacing: '0.8px', padding: '0 25px', fontSize: '18px', opacity: 0.75 , marginLeft:'-10px' }}>Servicios</Nav.Link>
               <Nav.Link href="/#locations" className={activeLink === 'locations' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('locations')}>Ubicacion</Nav.Link>
               {isAuthenticated && (
-                <Nav.Link as={Link} to="/misReservas" className={`nav-link ${activeLink === 'misReservas' ? 'active misReservas' : ''}`} onClick={() => onUpdateActiveLink('misReservas')}style={{ fontWeight: 400, color: '#2596be', letterSpacing: '0.8px', padding: '0 25px', fontSize: '18px', opacity: 0.75 }}>Reservas</Nav.Link>
+                <Nav.Link as={Link} to="/misReservas" className={`nav-link ${activeLink === 'misReservas' ? 'active misReservas' : ''}`} onClick={() => onUpdateActiveLink('misReservas')}style={{ fontWeight: 400, color: '#2596be', letterSpacing: '0.8px', padding: '0 25px', fontSize: '18px', opacity: 0.75, marginLeft:'-10px'}}>Mis reservas</Nav.Link>
               )}
             </Nav>
             <span className="navbar-text">
@@ -60,12 +60,12 @@ export const NavBar = () => {
               {isAuthenticated ? (
                 <div style={{ display: 'flex' }}>
                   <Button variant="contained" className="btn btn-lg vvd-btn connect-button" onClick={() => navigate('/makereservation')}>Reservar</Button>
-                  <IconButton size="small" onClick={logout} className="logout-button">
+                  <IconButton size="small" onClick={logout} className="logout-button" style={{ borderRadius: 0 }}>
                     <ExitToAppIcon />
                   </IconButton>
                 </div>
               ) : (
-                <Button variant="contained" className="btn btn-lg vvd-btn connect-button" onClick={() => navigate('/login')}>Connect</Button>
+                <Button variant="contained" className="btn btn-lg vvd-btn connect-button" style={{ borderRadius: 0 }} onClick={() => navigate('/login')}>Connect</Button>
               )}
               </span>
           </Navbar.Collapse>

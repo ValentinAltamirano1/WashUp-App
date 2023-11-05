@@ -18,6 +18,7 @@ import AdminDelete from './Components/AdminComponents/AdminDelete';
 import SuccessPage from './Components/PaymentSuccess';
 import FailurePage from './Components/PaymentFailure';
 import PendingPage from './Components/PaymentPending';
+import MyReservations from './Components/MyReservations';
 
 function App() {
   return (
@@ -42,6 +43,8 @@ function App() {
           <Route path="/success" element={SuccessPage} />
           <Route path="/failure" element={FailurePage} />
           <Route path="/pending" component={PendingPage} />
+          <Route path="/my-reservations" element={<MyReservations />} />
+
         </Routes>
       </Router>
     </AuthProvider>

@@ -15,6 +15,9 @@ import CreateEmployee from './Components/AdminComponents/CreateEmployee';
 import CreateServices from './Components/AdminComponents/CreateServices';
 import EmployeeInterface from './Components/EmployeeInterface';
 import AdminDelete from './Components/AdminComponents/AdminDelete';
+import SuccessPage from './Components/PaymentSuccess';
+import FailurePage from './Components/PaymentFailure';
+import PendingPage from './Components/PaymentPending';
 import MyReservations from './Components/MyReservations';
 
 function App() {
@@ -37,7 +40,11 @@ function App() {
           <Route path="/resetpassword" element={<ResetPassword />} />
           <Route path="/employeeinterface" element={<EmployeeInterface />} />
           <Route path="/admindelete" element={<AdminDelete />} />
+          <Route path="/success" element={SuccessPage} />
+          <Route path="/failure" element={FailurePage} />
+          <Route path="/pending" component={PendingPage} />
           <Route path="/my-reservations" element={<MyReservations />} />
+
         </Routes>
       </Router>
     </AuthProvider>

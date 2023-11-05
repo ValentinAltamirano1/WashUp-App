@@ -848,6 +848,33 @@ ul {
   margin: 10px 0;
 }
 
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.box-title {
+  margin: 0; 
+}
+
+.filter-container {
+  display: flex;
+  align-items: center;
+}
+
+.filter-label {
+  margin-right: 10px; 
+  color: white;
+  margin-bottom: 30px;
+}
+
+.filter-select {
+  margin: 0; 
+  margin-top: -25px; 
+}
+
+
 
 
 

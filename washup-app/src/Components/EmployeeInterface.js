@@ -10,6 +10,8 @@ const EmployeeInterface = () => {
   const employeeFullname = localStorage.getItem('employeeFullname');
   const employeeEmail = localStorage.getItem('employeeEmail');
   const [doneReservations, setDoneReservations] = useState([]);
+  const [selectedMonth, setSelectedMonth] = useState('');
+  console.log(selectedMonth);
 
 
   useEffect(() => {
@@ -95,12 +97,14 @@ const EmployeeInterface = () => {
   useEffect(() => {
     fetchAssignedReservations(); 
     fetchReservations(); 
-    fetchDoneReservations(); 
   }, [employeeEmail, token]);
   
   const fetchDoneReservations = async () => {
     try {
-      const doneReservationsResponse = await fetch(`http://localhost:4000/employee/reservations/done/assigned/${employeeEmail}`, {
+      
+      const year = new Date().getFullYear().toString(); 
+      console.log(year);
+      const doneReservationsResponse = await fetch(`http://localhost:4000/employee/reservations/done/assigned/${employeeEmail}/${year}/${selectedMonth}`,{
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -109,6 +113,7 @@ const EmployeeInterface = () => {
   
       if (doneReservationsResponse.ok) {
         const doneReservationsData = await doneReservationsResponse.json();
+        
         setDoneReservations(doneReservationsData);
       } else {
         console.error('Failed to fetch done reservations from the backend');
@@ -117,6 +122,7 @@ const EmployeeInterface = () => {
       console.error('Error fetching done reservations:', error);
     }
   };
+  
   
   const handleMarkAsDone = async (reservation) => {
 
@@ -138,19 +144,9 @@ const EmployeeInterface = () => {
       }
     
       if (response.ok) {
-
-        setDoneReservations((prevDone) => [...prevDone, reservation]);
+        
         setSelectedReservations((prevSelected) => prevSelected.filter((r) => r.id !== reservation.id));
-  
-        const doneReservationsResponse = await fetch(`http://localhost:4000/employee/reservations/done/assigned/${employeeEmail}`);
-        
-        
-        if (doneReservationsResponse.ok) {
-          const doneReservationsData = await doneReservationsResponse.json();
-          setDoneReservations(doneReservationsData);
-        } else {
-          console.error('Failed to fetch done reservations from the backend');
-        }
+
       } else {
         console.error('Failed to mark reservation as done in the backend');
       }
@@ -159,7 +155,15 @@ const EmployeeInterface = () => {
     }
   };
   
-  
+  const handleMonthChange = (event) => {
+    setSelectedMonth(event.target.value);
+  };
+
+  useEffect(() => {
+    if (selectedMonth) {
+      fetchDoneReservations();
+    }
+  }, [selectedMonth]);
 
   return (
     <div className="employee-interface">
@@ -219,7 +223,25 @@ const EmployeeInterface = () => {
           </div>
         </div>
         <div className="reservations-box">
-          <h3 className="box-title">Servicios realizados:</h3>
+          <h3 className="box-title">Servicios realizados en el año:</h3>
+          <div className="filter-container">
+            <label htmlFor="monthFilter" className="filter-label">Filtrar por mes:</label>
+            <select id="monthFilter" name="monthFilter" value={selectedMonth} onChange={handleMonthChange} className="filter-select">
+            <option value="">Seleccionar mes</option>
+              <option value="01">Enero</option>
+              <option value="02">Febrero</option>
+              <option value="03">Marzo</option>
+              <option value="04">Abril</option>
+              <option value="05">Mayo</option>
+              <option value="06">Junio</option>
+              <option value="07">Julio</option>
+              <option value="08">Agosto</option>
+              <option value="09">Septiembre</option>
+              <option value="10">Octubre</option>
+              <option value="11">Noviembre</option>
+              <option value="12" selected>Diciembre</option>
+            </select>
+          </div>
           <div className="reservation-columns">
             {doneReservations.map((reservation, index) => (
               <div key={reservation.id} className="reservation-box">

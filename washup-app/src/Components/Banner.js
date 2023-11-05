@@ -65,7 +65,7 @@ export const Banner = () => {
               
               <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
                 <h1>{`Bienvenido WashUp, `} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "rapido", "seguro", "economico" ]'><span className="wrap">{text}</span></span></h1>
-                  <p>"¡Descubre el brillo que tu vehículo merece en nuestro lavado de autos de primera categoría! En WashUp, ofrecemos un servicio profesional de lavado de autos que rejuvenece la apariencia de tu vehículo al eliminar la suciedad y las impurezas. Nuestro equipo de expertos y productos de alta calidad garantizan un resultado impecable. Confía en nosotros para dejar tu vehículo reluciente y listo para la carretera."</p>
+                  <p>¡Descubre el brillo que tu vehículo merece en nuestro lavado de autos de primera categoría! En WashUp, ofrecemos un servicio profesional de lavado de autos que rejuvenece la apariencia de tu vehículo al eliminar la suciedad y las impurezas. Nuestro equipo de expertos y productos de alta calidad garantizan un resultado impecable. Confía en nosotros para dejar tu vehículo reluciente y listo para la carretera."</p>
                   {!isAuthenticated && (
                     <Button onClick={() => navigate('/login')}>
                       Conectar <ArrowRightCircle size={25} />

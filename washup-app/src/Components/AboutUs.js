@@ -1,6 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
-import lavadero1 from "../assets/img/lavadero1.jpg";
-import lavadero2 from "../assets/img/lavadero2.jpg";
+import lavadero1 from "../assets/img/about-us-photo.jpg";
+import lavadero2 from "../assets/img/About-us-photo1.jpg";
 import { useState } from "react";
 import {NavBar} from "./NavBar";
 import './AboutsUs.css';
@@ -44,6 +44,12 @@ export const AboutUs = () => {
   const textStyle = {
     color: "#2596be",
     fontSize: "1.1em",
+  };
+
+  const textStyle2 = {
+    color: "#2596be",
+    fontSize: "1.1em",
+    marginTop: "100px",
   };
 
   const [isHovered1, setIsHovered1] = useState(false);
@@ -150,7 +156,7 @@ export const AboutUs = () => {
                           <p>1.</p>
                         </div>
                         <div className="card-back">
-                          <p>Calidad</p>
+                          <p>Respeto</p>
                         </div>
                       </div>
                     </div>
@@ -170,7 +176,7 @@ export const AboutUs = () => {
                           <p>3.</p>
                         </div>
                         <div className="card-back">
-                          <p>Atención Personalizada</p>
+                          <p>Calidad</p>
                         </div>
                       </div>
                     </div>
@@ -186,6 +192,9 @@ export const AboutUs = () => {
                     </div>
                   </div>
                 </div>
+                <p style={textStyle2}>
+                  En nuestra organización, nos guiamos por un conjunto de valores que son la base de nuestra cultura y el motor de nuestro éxito. Creemos que al vivir y trabajar de acuerdo con estos principios, podemos alcanzar nuestros objetivos y mantener relaciones sólidas con nuestros clientes, colaboradores y la comunidad en general.
+                </p>
               </div>
             </Col>
           </Row>

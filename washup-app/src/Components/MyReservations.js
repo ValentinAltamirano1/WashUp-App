@@ -7,13 +7,13 @@ const UserInterface = () => {
   const { token } = useAuth();
   const navigate = useNavigate();
 
-  // Extraer el userId del token de autenticación almacenado en localStorage
-  const userID = localStorage.getItem('userId');
+  const userEmail = localStorage.getItem('userEmail');
+  console.log(userEmail);
 
   const fetchUserReservations = async () => {
     try {
       console.log('Realizando solicitud para obtener reservas...');
-      const response = await fetch(`/my-reservations/${userID}`, {
+      const response = await fetch(`http://localhost:4000/my-reservations/${userEmail}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -25,33 +25,38 @@ const UserInterface = () => {
         setReservations(data.reservations);
       } else {
         console.log('Error en la solicitud:', response.status, response.statusText);
-        // Manejar el error de la solicitud
       }
     } catch (error) {
       console.error('Error de red u otro error:', error);
-      // Manejar errores de red u otros
     }
   };
 
   useEffect(() => {
     if (token === null) {
-      // El token se ha actualizado a null, por lo que redirige a la página de inicio de sesión
       navigate('/login');
     } else {
       console.log('Token de autenticación válido. Cargando reservas...');
-      // Cargar las reservas del usuario al iniciar la pantalla
       fetchUserReservations();
     }
-  }, [token, navigate, userID]);
+  }, [token, navigate, userEmail]);
 
   const handleReservationCancel = async (reservation) => {
     try {
-      // En una aplicación real, deberás enviar una solicitud al backend para cancelar la reserva.
-      // Aquí, simplemente simulamos la eliminación de la reserva localmente.
-      setReservations((prevReservations) => prevReservations.filter((r) => r.id !== reservation.id));
+      console.log(reservation.ID);
+      const response = await fetch(`http://localhost:4000/cancel-reservations/${reservation.ID}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        fetchUserReservations();
+      } else {
+        console.log('Error en la solicitud de cancelación:', response.status, response.statusText);
+      }
     } catch (error) {
-      console.error('Error al cancelar reserva:', error);
-      // Manejar errores de cancelación de reserva
+      console.error('Error de red u otro error al cancelar la reserva:', error);
     }
   };
 

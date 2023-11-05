@@ -33,6 +33,7 @@ const EmployeeInterface = () => {
         const data = await response.json();
         console.log(data);
         setReservations(data);
+        fetchReservations();
       } else {
         console.error('Failed to fetch reservations data');
       }

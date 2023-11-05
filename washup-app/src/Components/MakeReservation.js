@@ -4,6 +4,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import AutocompleteInput from './AutoCompleteInput';
 import mercadopago from 'mercadopago';
+import {NavBar} from "./NavBar";
 
 const Reservations = () => {
   const [servicio, setServicio] = useState('');
@@ -548,7 +549,9 @@ const Reservations = () => {
   };
 
   return (
-    <div className="products-container" style={{ marginTop: '40px', width: '100%', maxWidth: '700px' }}>
+    <div>
+      <NavBar />
+      <div className="products-container" style={{ marginTop: '40px', width: '100%', maxWidth: '700px' }}>
       <h2>Reservar un Servicio</h2>
       <form>
         <div className="form-group" style={{ marginTop: '40px', width: '100%', maxWidth: '700px' }}>
@@ -604,6 +607,8 @@ const Reservations = () => {
         )}
       </form>
     </div>
+    </div>
+    
   );
 };
 

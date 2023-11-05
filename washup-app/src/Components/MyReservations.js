@@ -9,7 +9,7 @@ const UserInterface = () => {
   const navigate = useNavigate();
   const userEmail = localStorage.getItem('userEmail');
   const userName = localStorage.getItem('userName'); // Obtener el nombre del usuario desde localStorage
-  const userEmail = localStorage.getItem('userEmail');
+  
 
   useEffect(() => {
     if (token === null) {

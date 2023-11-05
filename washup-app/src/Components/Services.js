@@ -5,56 +5,63 @@ import TrackVisibility from "react-on-screen";
 import ServiceCard from "./ServiceCard";
 import {NavBar} from "./NavBar";
 
-import service1Image from "../assets/img/lavadero1.jpg";
-import service2Image from "../assets/img/lavadero2.jpg";
-import service3Image from "../assets/img/ImgMediaCard.jpg";
+
+import lavadomotor from "../assets/img/lavadomotor.png";
+import lavadoexterior from "../assets/img/lavadoexterior.png";
+import lavadotapiceria from "../assets/img/lavadotapiceria.png";
+import limpiezavidrios from "../assets/img/limpiezavidrios.jpg";
+import lavadoexpress from "../assets/img/lavadoexpress.png";
+import encerado from "../assets/img/encerado.png";
+import desinfeccion from "../assets/img/desinfeccion.png";
+import lavadocompleto from "../assets/img/lavadocompleto.png";
+import lavadointerior from "../assets/img/lavadointerior.png";
 
 const Services = () => {
   const servicesData = [
     {
       title: "Lavado Exterior - $900",
       description: "Restaura la belleza de tu vehículo con nuestro lavado exterior. Eliminamos suciedad, polvo y manchas para devolverle su brillo original.",
-      image: service1Image, // Ruta de imagen para Servicio 1
+      image: lavadoexterior, // Ruta de imagen para Servicio 1
     },
     {
       title: "Lavado Interior - $750",
       description: "Refresca y renueva el interior de tu vehículo. Nuestro lavado interior incluye limpieza a fondo de tapicería, paneles y más.",
-      image: service2Image, // Ruta de imagen para Servicio 2
+      image: lavadointerior, // Ruta de imagen para Servicio 2
     },
     {
       title: "Lavado Completo - $1,500",
       description: "Combina nuestro lavado exterior y lavado interior para obtener un resultado completo. Tu coche se verá y se sentirá como nuevo.",
-      image: service3Image, // Ruta de imagen para Servicio 3
+      image: lavadocompleto, // Ruta de imagen para Servicio 3
     },
     {
       title: "Lavado de Motor - $1,200",
       description: "Mantén tu motor limpio y funcionando sin problemas. Nuestro lavado de motor elimina la acumulación de grasa y suciedad.",
-      image: service1Image,
+      image: lavadomotor,
     },
     {
       title: "Lavado de Tapicería - $850",
       description: "Cuida y renueva la tapicería de tu vehículo. Eliminamos manchas y suciedad para que tu interior luzca como nuevo.",
-      image: service2Image,
+      image: lavadotapiceria,
     },
     {
       title: "Encerado - $1,000",
       description: "Protege la pintura de tu vehículo con nuestro encerado. Proporciona brillo y crea una barrera contra los elementos.",
-      image: service3Image,
+      image: encerado,
     },
     {
       title: "Limpieza de Vidrios - $500",
       description: "Mejora la visibilidad y la estética con nuestra limpieza de vidrios. Adiós a manchas y rayones en las ventanas.",
-      image: service1Image,
+      image: limpiezavidrios,
     },
     {
       title: "Desinfección - $800",
       description: "Elimina gérmenes y bacterias con nuestra desinfección. Ideal para un ambiente saludable en tu vehículo.",
-      image: service2Image,
+      image: desinfeccion,
     },
     {
       title: "Lavado Express - $600",
       description: "Un lavado rápido pero efectivo para mantener tu vehículo limpio y presentable en poco tiempo.",
-      image: service3Image,
+      image: lavadoexpress,
     },
   ];
 

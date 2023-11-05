@@ -335,32 +335,18 @@ export const Locations = () => {
   // Define nombres y precios para cada zona
   const zones = [
     {
-      name: "Pocitos",
       color: "#FF0000",
       price: "$100",
     },
     {
-      name: "Punta Carretas",
       color: "#8A2BE2",
       price: "$120",
     },
     {
-      name: "Parque Batlle",
       color: "#0000FF",
       price: "$90",
     },
     {
-      name: "Malvín",
-      color: "#FF0000",
-      price: "$80",
-    },
-    {
-      name: "Punta Gorda",
-      color: "#8A2BE2",
-      price: "$110",
-    },
-    {
-      name: "Carrasco",
       color: "#228B22",
       price: "$130",
     },

@@ -14,6 +14,7 @@ export const Footer = () => {
             <div className="social-icon">
               <a href="#"><img src={navIcon3} alt="Icon" /></a>
             </div>
+            <p>Contacto: +598 98411324 </p>
             <p>Copyright 2023. All Rights Reserved</p>
           </Col>
         </Row>

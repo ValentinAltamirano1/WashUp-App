@@ -131,6 +131,9 @@ const Login = () => {
           const token = data.token;
           login(token);
           const employeeFullname = data.fullname;
+          const employeeEmail = data.email;
+          console.log(employeeEmail);
+          localStorage.setItem('employeeEmail', employeeEmail);
           localStorage.setItem('employeeFullname', employeeFullname);
           navigate('/employeeinterface');
         }

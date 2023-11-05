@@ -282,15 +282,14 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   color: #2596be !important;
   font-size: 20px;
   margin-right: 18px;
-  background-color: transparent;
-  border: none;
+  border: none !important;
   padding: 0;
   cursor: pointer;
-  transition: color 0.3s ease-in-out; /* Cambia el color al pasar el cursor */
+  background-color: transparent !important;
 }
 
-.logout-button:hover {
-  box-shadow: 0 0 5px rgba(37, 150, 190, 0.5); /* Agrega una sombra al pasar el cursor */
+.navbar-text .logout-button:hover {
+  background-color: transparent !important;
 }
 
 .navbar-link {
@@ -298,14 +297,17 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   color: #2596be;
   letter-spacing: 0.8px;
   padding: 0 25px;
+  margin: 0;
+  margin-left: -10px;
   font-size: 18px;
   opacity: 0.75;
   transition: color 0.3s; /* Agregar una transición suave para el cambio de color */
 }
 
-/* Estilos para los enlaces cuando el cursor está sobre ellos */
-.navbar-link:hover {
-  color: #ff7f50 !important; /* Cambia el color a uno más oscuro cuando se pasa el cursor */
+
+
+.custom-logo {
+  margin-left: -80px; /* Adjust the margin value as needed */
 }
 
 
@@ -818,4 +820,36 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   cursor: pointer;
   width: 300px;
 }
+
+.reservation-box {
+  flex: 0 0 calc(50% - 20px); /* 50% width with a little spacing between columns */
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 20px; /* Increased margin between reservation boxes for spacing */
+}
+.reservation-columns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.reservation-attribute {
+  margin-bottom: 5px; /* Add margin between attributes within the reservation box */
+}
+
+ul {
+  list-style: none; /* Remove bullet points */
+  margin: 0; /* Reset margin */
+  padding: 0; /* Reset padding */
+}
+
+.box-title {
+  text-align: center;
+  margin: 10px 0;
+}
+
+
+
+
+
 

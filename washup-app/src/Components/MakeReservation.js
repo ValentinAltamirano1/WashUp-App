@@ -29,11 +29,17 @@ const Reservations = () => {
     { name: "Punta Gorda", price: "$110" },
     { name: "Carrasco", price: "$130" },
   ];
+
+  // Añadir una nueva fecha mínima para bloquear fechas anteriores al día de hoy
+  const fechaMinima = new Date();
+  fechaMinima.setHours(0, 0, 0, 0);
   
   const zonesDict = zones.reduce((acc, zone) => {
     acc[zone.name] = zone.price;
     return acc;
   }, {});
+
+  
 
   const servicesData = [
     { title: "Lavado Exterior", price: "$900" },
@@ -572,6 +578,7 @@ const Reservations = () => {
               <DatePicker
                 selected={fecha}
                 onChange={(date) => setFecha(date)}
+                minDate={fechaMinima} // Esta línea bloquea las fechas anteriores al día de hoy
                 dateFormat="P"
                 className="select"
                 excludeDates={fechasNoDisponiblesFormatted}

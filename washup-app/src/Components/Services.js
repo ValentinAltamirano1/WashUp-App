@@ -4,8 +4,6 @@ import "animate.css";
 import TrackVisibility from "react-on-screen";
 import ServiceCard from "./ServiceCard";
 import {NavBar} from "./NavBar";
-
-
 import lavadomotor from "../assets/img/lavadomotor.png";
 import lavadoexterior from "../assets/img/lavadoexterior.png";
 import lavadotapiceria from "../assets/img/lavadotapiceria.png";
@@ -15,6 +13,7 @@ import encerado from "../assets/img/encerado.png";
 import desinfeccion from "../assets/img/desinfeccion.png";
 import lavadocompleto from "../assets/img/lavadocompleto.png";
 import lavadointerior from "../assets/img/lavadointerior.png";
+
 
 const Services = () => {
   const servicesData = [

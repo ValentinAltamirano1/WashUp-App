@@ -9,6 +9,7 @@ const UserInterface = () => {
   const navigate = useNavigate();
   const userEmail = localStorage.getItem('userEmail');
   const userName = localStorage.getItem('userName'); // Obtener el nombre del usuario desde localStorage
+  const userEmail = localStorage.getItem('userEmail');
 
   useEffect(() => {
     if (token === null) {
@@ -25,7 +26,7 @@ const UserInterface = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-
+ 
       if (response.ok) {
         const data = await response.json();
         setReservations(data.reservations || []); // Inicializa como un array vacío si no hay datos
@@ -36,7 +37,7 @@ const UserInterface = () => {
       console.error('Error de red u otro error al obtener las reservas:', error);
     }
   };
-
+ 
   const handleReservationCancel = async (reservation) => {
     try {
       const response = await fetch(`http://localhost:4000/cancel-reservations/${reservation.ID}`, {
@@ -45,7 +46,7 @@ const UserInterface = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-
+ 
       if (response.ok) {
         fetchUserReservations();
       } else {

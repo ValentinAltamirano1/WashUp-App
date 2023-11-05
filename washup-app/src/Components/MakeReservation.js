@@ -18,6 +18,42 @@ const Reservations = () => {
 
   const servicios = ['Lavado Exterior', 'Lavado Interior', 'Lavado Completo', 'Lavado de Motor', 'Lavado de Tapicería', 'Encerado', 'Limpieza de Vidrios', 'Desinfección', 'Lavado Express'];
   const horarios = ['9:00 AM', '10:00 AM', '11:00 AM', '2:00 PM', '3:00 PM'];
+  var zona;
+
+  const zones = [
+    { name: "Pocitos", price: "$100" },
+    { name: "Punta Carretas", price: "$120" },
+    { name: "Parque Battle", price: "$90" },
+    { name: "Malvin", price: "$80" },
+    { name: "Punta Gorda", price: "$110" },
+    { name: "Carrasco", price: "$130" },
+  ];
+  
+  const zonesDict = zones.reduce((acc, zone) => {
+    acc[zone.name] = zone.price;
+    return acc;
+  }, {});
+
+  const servicesData = [
+    { title: "Lavado Exterior", price: "$900" },
+    { title: "Lavado Interior", price: "$750" },
+    { title: "Lavado Completo", price: "$1,500" },
+    { title: "Lavado de Motor", price: "$1,200" },
+    { title: "Lavado de Tapicería", price: "$850" },
+    { title: "Encerado", price: "$1,000" },
+    { title: "Limpieza de Vidrios", price: "$500" },
+    { title: "Desinfección", price: "$800" },
+    { title: "Lavado Express", price: "$600" },
+  ];
+  
+  const servicesDict = servicesData.reduce((acc, service) => {
+    acc[service.title] = service.price;
+    return acc;
+  }, {});
+
+  const parsePrice = (priceString) => {
+    return parseFloat(priceString.replace('$', '').replace(',', ''));
+  };
 
   const handlePlaceSelect = (place) => {
     const map = new Map(document.getElementById("map"), {
@@ -32,7 +68,7 @@ const Reservations = () => {
       const latitud = place.geometry.location.lat();
       const longitude = place.geometry.location.lng();
 
-      const ubicacion = new window.google.maps.LatLng(latitud, longitude)
+      var ubicacion = new window.google.maps.LatLng(latitud, longitude)
 
       var pocitosCoords = [
         {lat: -34.902303398246524, lng: -56.16405778520276},
@@ -345,26 +381,32 @@ const Reservations = () => {
       const estaDentroDeCarrasco = window.google.maps.geometry.poly.containsLocation(ubicacion, carrascoPolygon);
 
       if (estaDentroDePocitos) {
+        zona = "Pocitos";
         console.log('La ubicación está dentro de Pocitos');
       }
 
       if (estaDentroDePuntaCarretas) {
+        zona = 'Punta Carretas';
         console.log('La ubicación está dentro de Punta Carretas');
       }
 
       if (estaDentroDeParqueBattle) {
+        zona = 'Parque Battle';
         console.log('La ubicación está dentro de Parque Battle');
       }
 
       if (estaDentroDeMalvin) {
+        zona = 'Malvin';
         console.log('La ubicación está dentro de Malvín');
       }
 
       if (estaDentroDePuntaGorda) {
+        zona = 'Punta Gorda';
         console.log('La ubicación está dentro de Punta Gorda');
       }
 
       if (estaDentroDeCarrasco) {
+        zona = 'Carrasco';
         console.log('La ubicación está dentro de Carrasco');
       }
 
@@ -434,12 +476,17 @@ const Reservations = () => {
   const backendURL = 'http://localhost:4000/reservations';
 
   const enviarReserva = () => {
+    var precioZona = parsePrice(zonesDict[zona]);
+    var precioServicio = parsePrice(servicesDict[servicio]);
+    var precioTotal = precioZona + precioServicio;
+
     const reservaData = {
       servicio: servicio,
       fecha: fecha.toISOString().slice(0, 10),
       horario: horarioSeleccionado,
       ubicacion: ubicacion,
       user_email: userEmail,
+      total_price: precioTotal,
     };
 
     console.log('Reserva:', reservaData);
@@ -472,14 +519,18 @@ const Reservations = () => {
   const backendMercadoPagoURL = 'http://localhost:4000/crear-preferencia';
 
   const enviarReservaMercadoPago = () => {
+    var precioZona = parsePrice(zonesDict[zona]);
+    var precioServicio = parsePrice(servicesDict[servicio]);
+    var precioTotal = precioZona + precioServicio;
+
     fetch(backendMercadoPagoURL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        title: 'Servicio',
-        price: 100.0
+        title: servicio,
+        price: precioTotal
       })
     })
     .then(response => {
@@ -489,9 +540,7 @@ const Reservations = () => {
       throw new Error('Error al crear la preferencia');
     })
     .then(data => {
-      // Rediriges al usuario al enlace de pago
-      console.log(data.init_point);
-      //window.location.href = data.init_point;
+      window.location.href = data.init_point;
     })
     .catch(error => {
       console.error('Error:', error);
@@ -549,7 +598,7 @@ const Reservations = () => {
           </div>
         )}
         {ubicacion && (
-          <button className="btn-reservar" type="button" onClick={() => {enviarReserva();/*</form> enviarReservaMercadoPago();*/}}>
+          <button className="btn-reservar" type="button" onClick={() => {enviarReserva(); enviarReservaMercadoPago();}}>
             Pagar
           </button>
         )}

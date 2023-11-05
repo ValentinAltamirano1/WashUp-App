@@ -11,7 +11,7 @@ const EmployeeInterface = () => {
   const employeeEmail = localStorage.getItem('employeeEmail');
   const [doneReservations, setDoneReservations] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState('');
-  console.log(selectedMonth);
+  
 
 
   useEffect(() => {
@@ -22,7 +22,9 @@ const EmployeeInterface = () => {
 
   const fetchReservations = async () => {
     try {
-      const response = await fetch('http://localhost:4000/employee/reservations-without-assignment', {
+      const month0 = new Date().getMonth() + 1;
+      const month= month0.toString();
+      const response = await fetch(`http://localhost:4000/employee/reservations-without-assignment/${month}`, {
         method: 'GET',
         /* headers: {
           'Authorization': `Bearer ${token}` // Include the token for authentication if needed
@@ -33,6 +35,7 @@ const EmployeeInterface = () => {
         const data = await response.json();
         console.log(data);
         setReservations(data);
+        fetchReservations();
       } else {
         console.error('Failed to fetch reservations data');
       }
@@ -103,7 +106,7 @@ const EmployeeInterface = () => {
     try {
       
       const year = new Date().getFullYear().toString(); 
-      console.log(year);
+      
       const doneReservationsResponse = await fetch(`http://localhost:4000/employee/reservations/done/assigned/${employeeEmail}/${year}/${selectedMonth}`,{
         method: 'GET',
         headers: {

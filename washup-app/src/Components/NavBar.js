@@ -31,6 +31,11 @@ export const NavBar = () => {
     setActiveLink(value);
   };
 
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
+
   return (
     <div className='nav-container'>
       <Navbar expand="lg" className={scrolled ? "scrolled" : ""}>
@@ -60,7 +65,7 @@ export const NavBar = () => {
               {isAuthenticated ? (
                 <div style={{ display: 'flex' }}>
                   <Button variant="contained" className="btn btn-lg vvd-btn connect-button" onClick={() => navigate('/makereservation')}>Reservar</Button>
-                  <IconButton size="small" onClick={logout} className="logout-button" style={{ borderRadius: 0 }}>
+                  <IconButton size="small" onClick={handleLogout} className="logout-button" style={{ borderRadius: 0 }}>
                     <ExitToAppIcon />
                   </IconButton>
                 </div>

@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from './AuthContext';
 import { useNavigate } from 'react-router-dom';
+import {NavBar} from "./NavBar";
 
 const UserInterface = () => {
   const [reservations, setReservations] = useState([]);
   const { token } = useAuth();
   const navigate = useNavigate();
-
   const userEmail = localStorage.getItem('userEmail');
-  console.log(userEmail);
+  const userName = localStorage.getItem('userName'); // Obtener el nombre del usuario desde localStorage
+
+  useEffect(() => {
+    if (token === null) {
+      navigate('/login');
+    } else {
+      fetchUserReservations();
+    }
+  }, [token, navigate, userEmail]);
 
   const fetchUserReservations = async () => {
     try {
-      console.log('Realizando solicitud para obtener reservas...');
       const response = await fetch(`http://localhost:4000/my-reservations/${userEmail}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -21,28 +28,17 @@ const UserInterface = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log('Reservas obtenidas:', data.reservations);
-        setReservations(data.reservations);
+        setReservations(data.reservations || []); // Inicializa como un array vacío si no hay datos
       } else {
-        console.log('Error en la solicitud:', response.status, response.statusText);
+        console.error('Error al obtener las reservas:', response.status, response.statusText);
       }
     } catch (error) {
-      console.error('Error de red u otro error:', error);
+      console.error('Error de red u otro error al obtener las reservas:', error);
     }
   };
 
-  useEffect(() => {
-    if (token === null) {
-      navigate('/login');
-    } else {
-      console.log('Token de autenticación válido. Cargando reservas...');
-      fetchUserReservations();
-    }
-  }, [token, navigate, userEmail]);
-
   const handleReservationCancel = async (reservation) => {
     try {
-      console.log(reservation.ID);
       const response = await fetch(`http://localhost:4000/cancel-reservations/${reservation.ID}`, {
         method: 'DELETE',
         headers: {
@@ -53,7 +49,7 @@ const UserInterface = () => {
       if (response.ok) {
         fetchUserReservations();
       } else {
-        console.log('Error en la solicitud de cancelación:', response.status, response.statusText);
+        console.error('Error al cancelar la reserva:', response.status, response.statusText);
       }
     } catch (error) {
       console.error('Error de red u otro error al cancelar la reserva:', error);
@@ -61,38 +57,41 @@ const UserInterface = () => {
   };
 
   return (
-    <div className="user-interface">
-      <header className="user-interface-header">
-        <h2 className="user-name">Hola, {localStorage.getItem('userName')}</h2>
-      </header>
-      <main className="user-interface-main">
-        <div className="user-reservations-box">
-          <h3 style={{ color: 'black' }}>Tus Reservas:</h3>
-          <ul>
+    <div>
+      <NavBar/>
+      <div className="employee-interface">
+      <main className="employee-interface-main">
+        <div className="reservations-box">
+          <h3 className="box-title">Tus Reservas:</h3>
+          <div className="reservation-columns">
             {reservations.map((reservation) => (
-              <li key={reservation.id} style={{ color: 'black' }}>
-                <div className="reservation-details">
-                  <div className="reservation-text">
-                    <div>
-                      <span className="info-label">Servicio:</span> {reservation.service}
-                    </div>
-                    <div>
-                      <span className="info-label">Fecha:</span> {reservation.date}
-                    </div>
-                  </div>
-                  <button className="cancel-button" onClick={() => handleReservationCancel(reservation)}>
-                    Cancelar Reserva
-                  </button>
+              <div key={reservation.ID} className="reservation-box">
+                <div className="reservation-attribute">
+                  <strong>Fecha:</strong> {reservation.date}
                 </div>
-              </li>
+                <div className="reservation-attribute">
+                  <strong>Hora:</strong> {reservation.time}
+                </div>
+                <div className="reservation-attribute">
+                  <strong>Ubicación:</strong> {reservation.location}
+                </div>
+                <div className="reservation-attribute">
+                  <strong>Servicio:</strong> {reservation.service}
+                </div>
+                <button className="done-button" onClick={() => handleReservationCancel(reservation)}>
+                  Cancelar Reserva
+                </button>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </main>
-      <footer className="user-interface-footer">
-        <p style={{ color: 'black' }}>&copy; 2023 Tu Aplicación. Todos los derechos reservados.</p>
+      <footer className="employee-interface-footer">
+        <p>&copy; 2023 Tu Aplicación. Todos los derechos reservados.</p>
       </footer>
     </div>
+    </div>
+    
   );
 };
 

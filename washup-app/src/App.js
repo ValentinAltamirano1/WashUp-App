@@ -40,9 +40,9 @@ function App() {
           <Route path="/resetpassword" element={<ResetPassword />} />
           <Route path="/employeeinterface" element={<EmployeeInterface />} />
           <Route path="/admindelete" element={<AdminDelete />} />
-          <Route path="/success" element={SuccessPage} />
-          <Route path="/failure" element={FailurePage} />
-          <Route path="/pending" component={PendingPage} />
+          <Route path="/success" element={<SuccessPage />} />
+          <Route path="/failure" element={<FailurePage />} />
+          <Route path="/pending" component={<PendingPage />} />
           <Route path="/my-reservations" element={<MyReservations />} />
 
         </Routes>

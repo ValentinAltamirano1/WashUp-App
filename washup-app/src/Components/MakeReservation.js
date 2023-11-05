@@ -5,6 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import AutocompleteInput from './AutoCompleteInput';
 import mercadopago from 'mercadopago';
 import {NavBar} from "./NavBar";
+import { enviarReserva } from './reservationsUtils';
 
 const Reservations = () => {
   const [servicio, setServicio] = useState('');
@@ -482,20 +483,21 @@ const Reservations = () => {
 
   const backendURL = 'http://localhost:4000/reservations';
 
-  const enviarReserva = () => {
-    var precioZona = parsePrice(zonesDict[zona]);
-    var precioServicio = parsePrice(servicesDict[servicio]);
-    var precioTotal = precioZona + precioServicio;
-
-    const reservaData = {
-      servicio: servicio,
-      fecha: fecha.toISOString().slice(0, 10),
-      horario: horarioSeleccionado,
-      ubicacion: ubicacion,
-      user_email: userEmail,
-      total_price: precioTotal,
-    };
-
+  const enviarReserva = (reservaData) => {
+    if (!reservaData) {
+      var precioZona = parsePrice(zonesDict[zona]);
+      var precioServicio = parsePrice(servicesDict[servicio]);
+      var precioTotal = precioZona + precioServicio;
+  
+      reservaData = {
+        servicio: servicio,
+        fecha: fecha.toISOString().slice(0, 10),
+        horario: horarioSeleccionado,
+        ubicacion: ubicacion,
+        user_email: userEmail,
+        total_price: precioTotal,
+      };
+    }
     console.log('Reserva:', reservaData);
     fetch(backendURL, {
       method: 'POST',
@@ -524,6 +526,27 @@ const Reservations = () => {
   const fechasNoDisponiblesFormatted = fechasNoDisponibles ? fechasNoDisponibles.map((fecha) => new Date(fecha)) : [];
 
   const backendMercadoPagoURL = 'http://localhost:4000/crear-preferencia';
+
+  const confirmarReserva = () => {
+    var precioZona = parsePrice(zonesDict[zona]);
+    var precioServicio = parsePrice(servicesDict[servicio]);
+    var precioTotal = precioZona + precioServicio;
+
+    // Guardar información de la reserva en el almacenamiento local
+    const reservaData = {
+      servicio: servicio,
+      fecha: fecha.toISOString().slice(0, 10),
+      horario: horarioSeleccionado,
+      ubicacion: ubicacion,
+      user_email: userEmail,
+      total_price: precioTotal,
+    };
+  
+    localStorage.setItem('reservaTemporal', JSON.stringify(reservaData));
+  
+    // Luego redirige a la página de pago
+    enviarReservaMercadoPago();
+  };
 
   const enviarReservaMercadoPago = () => {
     var precioZona = parsePrice(zonesDict[zona]);
@@ -608,7 +631,7 @@ const Reservations = () => {
           </div>
         )}
         {ubicacion && (
-          <button className="btn-reservar" type="button" onClick={() => {enviarReserva(); enviarReservaMercadoPago();}}>
+          <button className="btn-reservar" type="button" onClick={() => {confirmarReserva()}}>
             Pagar
           </button>
         )}

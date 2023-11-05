@@ -298,7 +298,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   letter-spacing: 0.8px;
   padding: 0 25px;
   margin: 0;
-  margin-left: -10px;
+  margin-left: -20px;
   font-size: 18px;
   opacity: 0.75;
   transition: color 0.3s; /* Agregar una transición suave para el cambio de color */

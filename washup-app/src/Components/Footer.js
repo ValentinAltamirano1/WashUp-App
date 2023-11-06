@@ -16,7 +16,8 @@ export const Footer = () => {
               <img src={navIcon3} alt="" />
             </a>
           </div>
-            <p>Contacto: +598 98411324 </p>
+            <p>celular: +598 98411324 </p>
+            <p>mail: contacto@washup.com </p>
             <p>Copyright 2023. All Rights Reserved</p>
           </Col>
         </Row>

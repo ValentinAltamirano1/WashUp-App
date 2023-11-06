@@ -1,8 +1,11 @@
 import { Container, Row, Col, Tab, Nav } from "react-bootstrap";
 import { ProjectCard } from "./ProjectCard";
-import projImg1 from "../assets/img/project-img1.jpg";
-import projImg2 from "../assets/img/project-img2.jpg";
-import projImg3 from "../assets/img/project-img3.jpg";
+import itau from "../assets/img/itau.png";
+import antel from "../assets/img/antel.jpg";
+import uber from "../assets/img/uber.png";
+import tripwip from "../assets/img/TripWip.png";
+import um from "../assets/img/um.png";
+import idatha from "../assets/img/idatha.jpg";
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
 
@@ -10,48 +13,34 @@ export const Project = () => {
 
   const projects = [
     {
-      title: "Montevideo Labs",
-      imgUrl: projImg1,
-    },
-    {
-      title: "Itau",
-      imgUrl: projImg2,
-    },
-    {
       title: "Antel",
-      imgUrl: projImg3,
+      imgUrl: antel,
+    },
+    {
+      title: "Universidad de Montevideo",
+      imgUrl: um,
+    },
+    {
+      title: "Idatha",
+      imgUrl: idatha,
     },
   ];
 
   const projects1 = [
     {
-      title: "Ancap",
-      imgUrl: projImg1,
+      title: "Uber",
+      imgUrl: uber,
     },
     {
-      title: "Disa",
-      imgUrl: projImg2,
+      title: "TripWip",
+      imgUrl: tripwip,
     },
     {
-      title: "Universidad de Montevideo",
-      imgUrl: projImg3,
+      title: "Itau",
+      imgUrl: itau,
     },
   ];
 
-  const projects2 = [
-    {
-      title: "Banco Santander",
-      imgUrl: projImg1,
-    },
-    {
-      title: "Tienda Inglesa",
-      imgUrl: projImg2,
-    },
-    {
-      title: "Disco",
-      imgUrl: projImg3,
-    },
-  ];
 
 
   return (
@@ -72,9 +61,6 @@ export const Project = () => {
                     <Nav.Item>
                       <Nav.Link eventKey="second">2</Nav.Link>
                     </Nav.Item>
-                    <Nav.Item>
-                      <Nav.Link eventKey="third">3</Nav.Link>
-                    </Nav.Item>
                   </Nav>
                   <Tab.Content id="slideInUp" className={isVisible ? "animate__animated animate__slideInUp" : ""}>
                     <Tab.Pane eventKey="first">
@@ -85,6 +71,7 @@ export const Project = () => {
                               <ProjectCard
                                 key={index}
                                 {...project}
+                              
                               />
                             )
                           })
@@ -95,20 +82,6 @@ export const Project = () => {
                       <Row>
                         {
                           projects1.map((project, index) => {
-                            return (
-                              <ProjectCard
-                                key={index}
-                                {...project}
-                              />
-                            )
-                          })
-                        }
-                      </Row>
-                    </Tab.Pane>
-                    <Tab.Pane eventKey="third">
-                      <Row>
-                        {
-                          projects2.map((project, index) => {
                             return (
                               <ProjectCard
                                 key={index}

@@ -59,9 +59,11 @@ export const NavBar = () => {
               )}
             </Nav>
             <span className="navbar-text">
-              <div className="social-icon">
-                <a href="#"><img src={navIcon1} alt="" /></a>
-              </div>
+            <div className="social-icon">
+              <a href="https://www.instagram.com/__washup__/?hl=en">
+                <img src={navIcon1} alt="" />
+              </a>
+            </div>
               {isAuthenticated ? (
                 <div style={{ display: 'flex' }}>
                   <Button variant="contained" className="btn btn-lg vvd-btn connect-button" onClick={() => navigate('/makereservation')}>Reservar</Button>

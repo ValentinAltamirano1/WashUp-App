@@ -167,7 +167,7 @@ const Login = () => {
   
   return (
     <div>
-      <h1 className="welcome">Welcome to WashUp</h1>
+      <h1 className="welcome">Bienvenido a WashUp</h1>
       <div className={`general-container ${isLoginForm ? '' : 'right-panel-active'}`}>
         {isLoginForm ? (
           <LoginForm
@@ -206,7 +206,7 @@ const RegisterForm = ({ username, email, password, setUsername, setEmail, setPas
   <div className="form-container register-container">
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet"></link>
     <form action="#">
-      <h1>Register here</h1>
+      <h1>Registrese aca</h1>
       {showMessage && (
         <p className="success-message">¡Registro exitoso! Ahora puedes iniciar sesión.</p>
       )}
@@ -214,11 +214,11 @@ const RegisterForm = ({ username, email, password, setUsername, setEmail, setPas
       <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
       <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
       {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Mostrar mensaje de error */}
-      <button  type="button" onClick={handleRegisterForm}>Register</button>
+      <button  type="button" onClick={handleRegisterForm}>Registrarse</button>
       <div className="social-container">
         <a href="https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&include_granted_scopes=true&response_type=token&redirect_uri=http://localhost:3000/auth/google/callback&client_id=5698593103-c586gjtp45p32p4vpdne33a9eajoupc4.apps.googleusercontent.com" className="social">
           <i className="lni lni-google"></i>
-          <span className="span-link">Register with your account</span>
+          <span className="span-link">Register con su cuenta</span>
         </a>
       </div>
     </form>
@@ -233,20 +233,16 @@ const LoginForm = ({ email, password, setEmail, setPassword, handleLoginForm, er
       <input type="text" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
       <input type="password" name="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
       <div className="content">
-        <div className="checkbox">
-          <input type="checkbox" id="remember-me" />
-          <label htmlFor="remember-me">Remember me</label>
-        </div>
         <div className="pass-link">
-          <Link to="/reset-password-mail">Forgot password?</Link>
+          <Link to="/reset-password-mail">Olvidaste tu contraseña?</Link>
         </div>
       </div>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
-      <button  type="button" onClick={handleLoginForm}>Login</button>
+      <button  type="button" onClick={handleLoginForm}>Ingresar</button>
       <div className="social-container">
         <a href="https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&include_granted_scopes=true&response_type=token&redirect_uri=http://localhost:3000/auth/google/callback&client_id=5698593103-c586gjtp45p32p4vpdne33a9eajoupc4.apps.googleusercontent.com" className="social">
           <i className="lni lni-google"></i>
-          <span>Login with your account</span>
+          <span>Ingresar con tu cuenta</span>
         </a>
       </div>
     </form>
@@ -255,20 +251,20 @@ const LoginForm = ({ email, password, setEmail, setPassword, handleLoginForm, er
 
 const LeftOverlay = ({ handleFormChange }) => (
   <div className="overlay-panel overlay-left">
-    <h1 className="title">Hello friends</h1>
-    <p>If you have an account, login here</p>
+    <h1 className="title">Hola amigos</h1>
+    <p>Si tenes una cuenta, ingresa aca</p>
     <button className="ghost" onClick={() => handleFormChange()}>
-      Login
+      Ingresar
     </button>
   </div>
 );
 
 const RightOverlay = ({ handleFormChange }) => (
   <div className="overlay-panel overlay-right">
-    <h1 className="title">Start your journey</h1>
-    <p>If you don't have an account yet, join us and start your journey.</p>
+    <h1 className="title">SEmpieza tu viaje</h1>
+    <p>Si no tenes una cuenta todavia, unite a nnosotros y comenza tu viaje.</p>
     <button className="ghost" onClick={() => handleFormChange()}>
-      Register
+      Registrarse
     </button>
   </div>
 );

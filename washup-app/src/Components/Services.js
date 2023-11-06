@@ -18,22 +18,22 @@ import lavadointerior from "../assets/img/lavadointerior.png";
 const Services = () => {
   const servicesData = [
     {
-      title: "Lavado Exterior - $900",
+      title: "Lavado Exterior - $350",
       description: "Restaura la belleza de tu vehículo con nuestro lavado exterior. Eliminamos suciedad, polvo y manchas para devolverle su brillo original.",
       image: lavadoexterior, // Ruta de imagen para Servicio 1
     },
     {
-      title: "Lavado Interior - $750",
+      title: "Lavado Interior - $450",
       description: "Refresca y renueva el interior de tu vehículo. Nuestro lavado interior incluye limpieza a fondo de tapicería, paneles y más.",
       image: lavadointerior, // Ruta de imagen para Servicio 2
     },
     {
-      title: "Lavado Completo - $1,500",
+      title: "Lavado Completo - $600",
       description: "Combina nuestro lavado exterior y lavado interior para obtener un resultado completo. Tu coche se verá y se sentirá como nuevo.",
       image: lavadocompleto, // Ruta de imagen para Servicio 3
     },
     {
-      title: "Lavado de Motor - $1,200",
+      title: "Lavado de Motor - $350",
       description: "Mantén tu motor limpio y funcionando sin problemas. Nuestro lavado de motor elimina la acumulación de grasa y suciedad.",
       image: lavadomotor,
     },
@@ -43,12 +43,12 @@ const Services = () => {
       image: lavadotapiceria,
     },
     {
-      title: "Encerado - $1,000",
+      title: "Encerado - $700",
       description: "Protege la pintura de tu vehículo con nuestro encerado. Proporciona brillo y crea una barrera contra los elementos.",
       image: encerado,
     },
     {
-      title: "Limpieza de Vidrios - $500",
+      title: "Limpieza de Vidrios - $200",
       description: "Mejora la visibilidad y la estética con nuestra limpieza de vidrios. Adiós a manchas y rayones en las ventanas.",
       image: limpiezavidrios,
     },
@@ -58,7 +58,7 @@ const Services = () => {
       image: desinfeccion,
     },
     {
-      title: "Lavado Express - $600",
+      title: "Lavado Express - $300",
       description: "Un lavado rápido pero efectivo para mantener tu vehículo limpio y presentable en poco tiempo.",
       image: lavadoexpress,
     },

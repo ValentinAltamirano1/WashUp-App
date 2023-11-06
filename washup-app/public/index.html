@@ -47,6 +47,14 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-upHQAJfOoePqdwfQfa_8W0Xvpp1hwvM&libraries=places,geometry"></script>
+    <script>
+      function initGoogleMaps() {
+        // Esta función se llamará una vez que se cargue la API de Google Maps
+        // No necesitas poner nada aquí porque la inicialización la manejas en React
+      }
+  
+      window.initGoogleMaps = initGoogleMaps;
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-upHQAJfOoePqdwfQfa_8W0Xvpp1hwvM&libraries=places,geometry&callback=initGoogleMaps"></script>
   </body>
 </html>

@@ -43,15 +43,15 @@ const Reservations = () => {
   
 
   const servicesData = [
-    { title: "Lavado Exterior", price: "$900" },
-    { title: "Lavado Interior", price: "$750" },
-    { title: "Lavado Completo", price: "$1,500" },
-    { title: "Lavado de Motor", price: "$1,200" },
+    { title: "Lavado Exterior", price: "$350" },
+    { title: "Lavado Interior", price: "$450" },
+    { title: "Lavado Completo", price: "$600" },
+    { title: "Lavado de Motor", price: "$350" },
     { title: "Lavado de Tapicería", price: "$850" },
-    { title: "Encerado", price: "$1,000" },
-    { title: "Limpieza de Vidrios", price: "$500" },
+    { title: "Encerado", price: "$700" },
+    { title: "Limpieza de Vidrios", price: "$200" },
     { title: "Desinfección", price: "$800" },
-    { title: "Lavado Express", price: "$600" },
+    { title: "Lavado Express", price: "$300" },
   ];
   
   const servicesDict = servicesData.reduce((acc, service) => {
